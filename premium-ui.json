@@ -1,0 +1,34 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": [
+    "resources"
+  ],
+  "locale": "id-ID",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": [
+    "Select/Listbox",
+    "Date",
+    "Form",
+    "Scrollbar",
+    "Toast",
+    "CRUD"
+  ],
+  "ownership": {
+    "Select/Listbox": "native",
+    "Date": "native"
+  },
+  "requiredCommands": [
+    "unit",
+    "build",
+    "browser"
+  ],
+  "commands": {
+    "unit": "./scripts/php.ps1 artisan test",
+    "build": "npm run build",
+    "browser": "npm run test:browser"
+  },
+  "evidence": {
+    "crudFullFlow": "tests/Feature/AuthAndAdminTest.php",
+    "failurePaths": "tests/Feature/PaymentsTest.php"
+  }
+}

@@ -1,0 +1,15 @@
+# Arsitektur
+
+Laravel 12, PHP 8.4 portabel lokal, Blade + Tailwind 4/Vite, SQLite WAL, tanpa layanan tambahan. Laragon/PATH/global PHP tidak diubah. Lock files composer/npm tersedia. Target penggunaan lokal, bukan deployment.
+
+Struktur domain: app/Models; Http/Controllers/{Customer,Admin,Payments}; Http/Requests; Policies; Services/Booking/BookingService; Services/Payments/{MidtransGateway,PaymentService}; Console/Commands; config/courtbook.php; routes/{web,admin,console}; resources/views/{layouts,components,auth,customer,admin}; resources/css/{app,booking}; resources/js/{app,booking,payments}; database/{migrations,seeders}; tests/{Feature,Unit}; docs.
+
+User (role customer/admin) hasMany Booking. Court hasMany Booking/Maintenance. Booking menyimpan snapshot harga dan deadline, hasMany PaymentAttempt/RefundRequest. Reservation milik Booking atau Maintenance dengan unique(court_id, starts_at). Setting id=1 menjadi operational settings sekaligus write guard. PaymentAttempt order_id unique, provider_transaction_id unique, nullable active_booking_id unique untuk paling banyak satu outstanding per booking. Refund reference unique menghilangkan duplicate kasus.
+
+SQLite tidak menggunakan SELECT FOR UPDATE semu: setiap transaksi domain meng-update Setting lock_version SEBELUM membaca kondisi. Ini memperoleh writer reservation SQLite; busy_timeout 5000ms, transaction retry 5. Domain write bookings/payment/maintenance/settings/court semua melalui atomic. Unique hourly reservation menjadi pertahanan DB kedua. Tidak ada panggilan jaringan di transaksi SQLite: attempt creating committed sebelum Snap API, response disimpan setelahnya, timeout tetap uncertain. File SQLite harus di disk lokal, bukan share jaringan. Ini serialisasi global sederhana untuk praktikum, bukan skala multi-node.
+
+Booking: Form Request -> BookingService atomic -> expire -> eligibility -> conflict -> Booking snapshots -> reserve each hour -> checkout. Notification: CSRF-excluded khusus endpoint -> signature SHA512 -> local order/amount -> authenticated GET status -> amount/order/merchant/currency -> atomic expire and transition -> credit once atau late/refund. Callback JS hanya feedback. Scheduler meng-expire tiap menit, reconcile tiap 5 menit.
+
+Retensi: lapangan dengan riwayat booking/maintenance tidak boleh hard delete; dapat nonaktif. Pembayaran/booking/refund tidak memiliki endpoint hard delete. Foreign keys melindungi referensi. Guarded role pada User, registration tidak menerima role. Gate policy pada booking; admin dapat baca/reconcile tetapi tidak pay/cancel milik pelanggan. CSRF web aktif kecuali webhook; throttle auth/reset/payment/reconcile.
+
+Keterbatasan: refund/chargeback manual, belum audit beban/penetrasi, belum observability/notifikasi pengingat produksi. Transaksi uncertain yang belum terbentuk di kanal tidak dapat otomatis diulang secara aman; pengelola harus memeriksa status kanal/order dengan bukti, tidak memberi status sukses sembarangan. Gateway GET 404 tidak dianggap final karena Snap bisa belum punya status sebelum pemilihan metode pembayaran.

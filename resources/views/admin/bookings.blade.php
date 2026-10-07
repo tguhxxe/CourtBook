@@ -1,0 +1,3 @@
+@extends('layouts.admin')
+@section('title','Booking pelanggan')
+@section('content')<div class="page-heading"><h1>Booking pelanggan</h1><p class="muted">Lihat jadwal dan tagihan tanpa mengubah status pembayaran.</p></div><form novalidate class="filter-bar" method="get"><x-field name="q" label="Kode booking" :value="request('q')" placeholder="CB-..."/><button class="btn outline">Cari booking</button><a class="btn ghost" href="{{ route('admin.bookings') }}" aria-label="Hapus pencarian">Hapus pencarian</a></form><div class="panel no-padding"><x-bookings-table :bookings="$bookings" admin/></div>{{ $bookings->links() }}@endsection

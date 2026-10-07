@@ -1,0 +1,3 @@
+@props(['value'])
+@php($labels=['held'=>'Menunggu pembayaran','confirmed'=>'Dikonfirmasi','cancelled'=>'Dibatalkan','expired'=>'Kedaluwarsa','unpaid'=>'Belum dibayar','partial'=>'DP dibayar','paid'=>'Lunas / berhasil','creating'=>'Memulai pembayaran','uncertain'=>'Perlu pemeriksaan','pending'=>'Menunggu verifikasi','deny'=>'Ditolak kanal','cancel'=>'Dibatalkan kanal','expire'=>'Kedaluwarsa kanal','failure'=>'Gagal','requested'=>'Diajukan','reviewing'=>'Ditinjau admin','processed'=>'Penanganan selesai','rejected'=>'Ditolak'])
+<span class="badge badge-{{ $value }}">{{ $labels[$value] ?? $value }}</span>

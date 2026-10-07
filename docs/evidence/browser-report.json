@@ -1,0 +1,102 @@
+{
+  "executedAt": "2026-10-07T13:17:13.169Z",
+  "base": "http://127.0.0.1:8000",
+  "checks": [
+    {
+      "name": "home desktop no page overflow",
+      "passed": true
+    },
+    {
+      "name": "Desktop home and keyboard skip link",
+      "passed": true
+    },
+    {
+      "name": "Search no-results and accessible clear",
+      "passed": true
+    },
+    {
+      "name": "Login error preserves email and shows invalid state",
+      "passed": true
+    },
+    {
+      "name": "Password show/hide",
+      "passed": true
+    },
+    {
+      "name": "Customer schedule selection and calculated price",
+      "passed": true
+    },
+    {
+      "name": "Unconfigured checkout and safe cancellation keyboard dialog",
+      "passed": true
+    },
+    {
+      "name": "Profile unsaved changes guard",
+      "passed": true
+    },
+    {
+      "name": "Admin create/edit/delete full flow",
+      "passed": true
+    },
+    {
+      "name": "Admin maintenance create and release",
+      "passed": true
+    },
+    {
+      "name": "home mobile no page overflow",
+      "passed": true
+    },
+    {
+      "name": "schedule mobile no page overflow",
+      "passed": true
+    },
+    {
+      "name": "admin mobile no page overflow",
+      "passed": true
+    },
+    {
+      "name": "Narrow viewport home schedule/admin no overflow",
+      "passed": true
+    },
+    {
+      "name": "Native select keyboard and reduced motion/global scrollbar",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "home desktop",
+      "violations": []
+    },
+    {
+      "name": "login validation",
+      "violations": []
+    },
+    {
+      "name": "schedule desktop",
+      "violations": []
+    },
+    {
+      "name": "checkout desktop",
+      "violations": []
+    },
+    {
+      "name": "admin dashboard desktop",
+      "violations": []
+    },
+    {
+      "name": "home mobile",
+      "violations": []
+    },
+    {
+      "name": "schedule mobile",
+      "violations": []
+    },
+    {
+      "name": "admin mobile",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "passed": true
+}
