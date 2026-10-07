@@ -34,7 +34,7 @@ Admin tabel 15 baris, booking pelanggan 10, katalog 9. Search/filter/page melalu
 | Delete court | Dialog hapus | fokus aman, submit disabled | daftar | status dihapus | riwayat melarang hapus, arahkan nonaktif | pemulihan fokus dialog | architecture retention |
 | Create booking | Booking jadwal ini | submit disabled | Detail checkout | batas 15 menit | konflik slot, input dipertahankan | ringkasan error | BR-01 sampai BR-06 |
 | Cancel booking | Dialog batalkan | fokus aman | detail | refund manual bila layak | batas 24 jam | pemulihan fokus | BR-10 |
-| Payment | Setuju ketentuan dan lanjut | blok percobaan duplikat | halaman Snap lalu detail | status diperiksa server | uncertain tetap diblok, reconcile | pesan status | BR-07 sampai BR-09 |
+| Payment | Setuju ketentuan dan lanjut | blok percobaan duplikat; periksa server otomatis | Snap lalu detail otomatis setelah status final | DP berhasil/lunas hanya setelah verifikasi; refund terpisah | polling 5 detik maksimal 12 pemeriksaan, retry manual; uncertain tetap diblok | pesan status aria-live | BR-07 sampai BR-09 |
 | Search | tombol Cari/clear | submit disabled | query URL | jumlah hasil | validasi teks/filter | field atau ringkasan | FR-COURT-01 |
 | Profile | Simpan profil | submit disabled | profil | status tersimpan | kata sandi saat ini wajib untuk ubah password | ringkasan | FR-PROFILE-01 |
 

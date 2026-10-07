@@ -28,3 +28,6 @@ Tombol Periksa status pada detail booking/admin dan command `php artisan courtbo
 6. Dokumentasikan bukti tanpa key/data kartu. Refund diproses manual sesuai dukungan kanal; form progres tidak mengeksekusi refund.
 
 Pengujian otomatis memakai Http::fake + preventStrayRequests; bukan transaksi Midtrans sungguhan. Sandbox sungguhan BELUM diuji karena kredensial belum diberikan. Tidak ada pembayaran live atau refund otomatis yang diklaim.
+
+## Pembaruan status otomatis
+Halaman pembayaran dan detail booking dengan attempt belum final memanggil endpoint reconcile terautentikasi melalui POST + CSRF. Callback Snap hanya memicu pemeriksaan, bukan bukti pembayaran. Status final mengarahkan ke detail booking terbaru; DP dan lunas memiliki pesan sukses tersendiri. Pemeriksaan berurutan setiap 5 detik, maksimal 12 kali per siklus, berhenti saat halaman ditinggalkan atau sesi kedaluwarsa, dan menyediakan tombol periksa lagi. Webhook dan scheduler tetap diperlukan ketika pelanggan menutup halaman. Pemeriksaan manual tetap mengambil status provider, termasuk untuk transaksi yang sudah dibayar.

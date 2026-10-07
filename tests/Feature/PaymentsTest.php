@@ -34,7 +34,7 @@ class PaymentsTest extends TestCase
         $this->customer = User::where('role', 'customer')->first();
         $this->booking = app(BookingService::class)->create($this->customer, Court::first(), ['date' => '2026-10-09', 'hour' => 9, 'duration' => 2]);
         $this->service = app(PaymentService::class);
-        config(['courtbook.midtrans.server_key' => 'test-server', 'courtbook.midtrans.client_key' => 'test-client']);
+        config(['courtbook.midtrans.server_key' => 'test-server', 'courtbook.midtrans.client_key' => 'test-client', 'courtbook.midtrans.merchant_id' => null]);
         Http::preventStrayRequests();
     }
 
@@ -303,5 +303,53 @@ class PaymentsTest extends TestCase
         Http::fake(['*/status' => Http::response($server)]);
         $this->postJson('/midtrans/notification', $data)->assertStatus(422);
         $this->assertSame(0, $this->booking->fresh()->paid_amount);
+    }
+
+    public function test_automatic_status_verifies_payment_and_returns_booking_destination(): void
+    {
+        $a = $this->start();
+        Http::fake(['*/status' => Http::response($this->data($a))]);
+        $this->actingAs($this->customer)->postJson('/payments/'.$a->id.'/reconcile')
+            ->assertOk()->assertJsonPath('status', 'paid')->assertJsonPath('terminal', true)
+            ->assertJsonPath('redirect_url', route('bookings.show', $this->booking));
+        $this->get('/bookings/'.$this->booking->id)->assertOk()->assertSee('Pembayaran DP berhasil.');
+        $this->postJson('/payments/'.$a->id.'/reconcile')->assertOk();
+        $this->assertSame(100000, $this->booking->fresh()->paid_amount);
+    }
+
+    public function test_automatic_status_does_not_trust_browser_success(): void
+    {
+        $a = $this->start();
+        Http::fake(['*/status' => Http::response($this->data($a, 'pending'))]);
+        $this->actingAs($this->customer)->postJson('/payments/'.$a->id.'/reconcile', ['transaction_status' => 'settlement'])
+            ->assertOk()->assertJsonPath('status', 'pending')->assertJsonPath('terminal', false);
+        $this->assertSame(0, $this->booking->fresh()->paid_amount);
+        $this->get('/bookings/'.$this->booking->id)->assertSee('data-payment-watch', false);
+    }
+
+    public function test_automatic_status_reports_provider_failure_without_confirming(): void
+    {
+        $a = $this->start();
+        Http::fake(['*/status' => Http::response([], 500)]);
+        $this->actingAs($this->customer)->postJson('/payments/'.$a->id.'/reconcile')->assertStatus(503);
+        $this->assertSame(0, $this->booking->fresh()->paid_amount);
+    }
+
+    public function test_automatic_status_requires_payment_ownership(): void
+    {
+        $a = $this->start();
+        $other = User::factory()->create(['role' => 'customer']);
+        $this->actingAs($other)->postJson('/payments/'.$a->id.'/reconcile')->assertForbidden();
+    }
+
+    public function test_late_automatic_success_reports_refund_instead_of_confirmation(): void
+    {
+        $a = $this->start();
+        $this->travel(16)->minutes();
+        Http::fake(['*/status' => Http::response($this->data($a))]);
+        $this->actingAs($this->customer)->postJson('/payments/'.$a->id.'/reconcile')
+            ->assertOk()->assertJsonPath('terminal', true)
+            ->assertJsonPath('message', 'Pembayaran diterima. Booking tidak dikonfirmasi; lihat penanganan refund atau hubungi pengelola.');
+        $this->assertSame('expired', $this->booking->fresh()->status);
     }
 }

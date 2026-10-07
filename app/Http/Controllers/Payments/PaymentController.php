@@ -23,18 +23,45 @@ class PaymentController extends Controller
         return view('customer.pay', compact('attempt', 'booking'));
     }
 
-    public function reconcile(PaymentAttempt $payment, PaymentService $s)
+    public function reconcile(Request $request, PaymentAttempt $payment, PaymentService $s)
     {
         Gate::authorize('view', $payment->booking);
         try {
-            $s->reconcile($payment);
+            if (! $request->expectsJson() || ! $payment->credited_at) {
+                $s->reconcile($payment);
+            }
         } catch (ValidationException $e) {
             throw $e;
         } catch (\Throwable $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Status belum dapat diperiksa. Coba lagi; jangan membayar ulang.'], 503);
+            }
+
             return back()->withErrors(['payment' => 'Status belum dapat diperiksa. Coba kembali; jangan membuat pembayaran kedua.']);
         }
 
-return back()->with('status', 'Status transaksi diperiksa dari server pembayaran.');
+        $payment->refresh();
+        $booking = $payment->booking()->firstOrFail();
+        $review = $booking->refunds()->where('payment_attempt_id', $payment->id)->exists();
+        $paid = $payment->status === 'paid';
+        $message = $paid
+            ? ($review || $booking->status !== 'confirmed'
+                ? 'Pembayaran diterima. Booking tidak dikonfirmasi; lihat penanganan refund atau hubungi pengelola.'
+                : ($booking->payment_status === 'paid' ? 'Pembayaran berhasil. Booking sudah lunas.' : 'Pembayaran DP berhasil. Booking dikonfirmasi; silakan lunasi sisa tagihan sebelum batas waktu.'))
+            : (in_array($payment->status, ['deny', 'cancel', 'expire', 'failure'])
+                ? 'Pembayaran tidak berhasil atau sudah kedaluwarsa. Periksa detail booking sebelum mencoba kembali.'
+                : 'Pembayaran masih menunggu penyelesaian. Status akan diperiksa otomatis.');
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => $payment->status,
+                'terminal' => $paid || in_array($payment->status, ['deny', 'cancel', 'expire', 'failure']),
+                'message' => $message,
+                'redirect_url' => route('bookings.show', $booking),
+            ])->header('Cache-Control', 'no-store');
+        }
+
+        return back()->with('status', $message);
     }
 
     public function webhook(Request $r, PaymentService $s)
@@ -45,6 +72,6 @@ return back()->with('status', 'Status transaksi diperiksa dari server pembayaran
             return response()->json(['message' => 'Verifikasi kanal belum tersedia; ulangi notifikasi.'], 503);
         }
 
-return response()->json(['message' => 'OK']);
+        return response()->json(['message' => 'OK']);
     }
 }

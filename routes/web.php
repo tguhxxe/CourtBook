@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
     Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
     Route::post('/bookings/{booking}/payments', [PaymentController::class, 'store'])->middleware('throttle:10,1')->name('payments.store');
-    Route::post('/payments/{payment}/reconcile', [PaymentController::class, 'reconcile'])->middleware('throttle:6,1')->name('payments.reconcile');
+    Route::post('/payments/{payment}/reconcile', [PaymentController::class, 'reconcile'])->middleware('throttle:30,1')->name('payments.reconcile');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
