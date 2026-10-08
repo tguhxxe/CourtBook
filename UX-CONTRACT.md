@@ -34,7 +34,7 @@ Admin tabel 15 baris, booking pelanggan 10, katalog 9. Search/filter/page melalu
 | Delete court | Dialog hapus | fokus aman, submit disabled | daftar | status dihapus | riwayat melarang hapus, arahkan nonaktif | pemulihan fokus dialog | architecture retention |
 | Create booking | Booking jadwal ini | submit disabled | Detail checkout | batas 15 menit | konflik slot, input dipertahankan | ringkasan error | BR-01 sampai BR-06 |
 | Cancel booking | Dialog batalkan | fokus aman | detail | refund manual bila layak | batas 24 jam | pemulihan fokus | BR-10 |
-| Payment | Setuju ketentuan dan lanjut | blok percobaan duplikat; periksa server otomatis | Snap lalu detail otomatis setelah status final | DP berhasil/lunas hanya setelah verifikasi; refund terpisah | polling 5 detik maksimal 12 pemeriksaan, retry manual; uncertain tetap diblok | pesan status aria-live | BR-07 sampai BR-09 |
+| Payment | Setuju ketentuan dan lanjut | blok percobaan duplikat; periksa server otomatis | Snap lalu detail otomatis setelah status final | DP berhasil/lunas hanya setelah verifikasi; refund terpisah | polling 5 detik maksimal 180 pemeriksaan pending (sekitar 15 menit), jeda setelah 12 kegagalan beruntun, retry manual; uncertain tetap diblok | pesan status aria-live | BR-07 sampai BR-09 |
 | Search | tombol Cari/clear | submit disabled | query URL | jumlah hasil | validasi teks/filter | field atau ringkasan | FR-COURT-01 |
 | Profile | Simpan profil | submit disabled | profil | status tersimpan | kata sandi saat ini wajib untuk ubah password | ringkasan | FR-PROFILE-01 |
 
@@ -49,3 +49,7 @@ novalidate; Laravel Form Request/service otoritatif. Nilai non-secret dipertahan
 
 ## Guided customer booking
 Customer-only checkout uses customer/bookings/checkout.blade.php; admin retains customer/bookings/show.blade.php. The four-step indicator is informational, never a link that bypasses payment verification. Slot selection uses one native radio group; duration changes clear a selection when the full interval no longer fits. The summary announces the selected start/end and total; Continue requires a valid selection when JavaScript is available, with the server still authoritative. Date selection uses an explicit Lihat jadwal action and Today/Tomorrow links. DP/full choices expose their amounts before submission; payment status, deadlines, refund handling, and cancellation rules are unchanged. Native disclosures hold supplementary history and terms, while the payment deadline and DP forfeiture warning remain visible. No new external payment action is introduced.
+
+
+## Customer refund
+RefundController and BookingService own the customer refund flow. Refund saya lists only requests whose booking belongs to the signed-in customer, ten per page, with amount, reason, progress, dates and admin notes. The shared customer-refund-form uses the canonical field, confirmation dialog and feedback components. Submitting a reason cancels a paid booking under the existing 24-hour rule and creates the same cancel reference consumed by admin; no client-controlled amount or status is accepted. Unpaid bookings retain cancellation without refund. Repeat, expired, ineligible and cross-owner submissions cannot create new refunds. Refund transfers remain manual.

@@ -90,3 +90,22 @@ test('session expiry stops checks without showing success', async () => {
     assert.equal(ui.timers.size, 0);
     assert.deepEqual(ui.destinations, []);
 });
+
+
+test('VA settlement after more than one minute still redirects automatically', async () => {
+    const ui = setup([...Array.from({ length: 15 }, () => ({ terminal: false, message: 'Pending' })), success]);
+    await flush();
+    for (let i = 1; i < 16; i++) await ui.tick();
+    assert.equal(ui.requests.length, 16);
+    assert.deepEqual(ui.destinations, ['/bookings/1']);
+});
+
+test('long pending checks remain bounded and expose manual retry', async () => {
+    const ui = setup([]);
+    await flush();
+    for (let i = 1; i < 180; i++) await ui.tick();
+    assert.equal(ui.requests.length, 180);
+    assert.equal(ui.retry.hidden, false);
+    assert.equal(ui.timers.size, 0);
+    assert.deepEqual(ui.destinations, []);
+});

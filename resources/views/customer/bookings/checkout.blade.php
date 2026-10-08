@@ -25,7 +25,7 @@
                 <p class="small-copy muted">Jadwal tidak dapat diubah setelah dipesan. Jika belum membayar dan jadwal salah, batalkan pesanan ini lalu pilih jadwal baru.</p>
             </section>
             @if($booking->refunds->count())
-            <section class="panel"><h2>Penanganan refund</h2>@foreach($booking->refunds as $refund)<div class="transaction-item"><div><strong>Rp{{ number_format($refund->amount,0,',','.') }}</strong><p>{{ $refund->reason }}</p><x-status :value="$refund->status"/>@if($refund->admin_notes)<p>{{ $refund->admin_notes }}</p>@endif</div></div>@endforeach<p class="muted">Progres dicatat admin. Refund tidak otomatis.</p></section>
+            <section class="panel"><h2>Penanganan refund</h2><a class="text-link" href="{{ route('refunds.index') }}">Lihat refund saya &rarr;</a>@foreach($booking->refunds as $refund)<div class="transaction-item"><div><strong>Rp{{ number_format($refund->amount,0,',','.') }}</strong><p>{{ $refund->reason }}</p><x-status :value="$refund->status"/>@if($refund->admin_notes)<p>{{ $refund->admin_notes }}</p>@endif</div></div>@endforeach<p class="muted">Progres dicatat admin. Refund tidak otomatis.</p></section>
             @endif
         </div>
         <aside class="panel flow-summary">
@@ -65,7 +65,9 @@
             @forelse($booking->payments as $payment)<div class="transaction-item"><div><strong>Rp{{ number_format($payment->amount,0,',','.') }}</strong> · {{ ['dp'=>'Uang muka (DP)','full'=>'Pembayaran penuh','balance'=>'Pelunasan'][$payment->kind] }}<small class="mono wrap-anywhere">{{ $payment->order_id }}</small><x-status :value="$payment->status"/></div><form novalidate method="post" action="{{ route('payments.reconcile',$payment) }}">@csrf<button class="btn outline small">Periksa status</button></form></div>@empty<p class="muted">Belum ada percobaan pembayaran.</p>@endforelse
         </details>
         @if(!$canPay)<details class="flow-details"><summary>Ketentuan pembayaran & pembatalan</summary><x-terms/></details>@endif
-        @if($booking->canCancel())
+        @if($booking->canCancel() && $booking->paid_amount)
+        <x-customer-refund-form :booking="$booking"/>
+        @elseif($booking->canCancel())
         <details class="flow-details"><summary>Ingin membatalkan pesanan?</summary><p>Jadwal akan dilepas. Pengembalian dana mengikuti ketentuan pembatalan.</p><form novalidate action="{{ route('bookings.cancel',$booking) }}" method="post" data-confirm="Batalkan {{ $booking->code }}? Slot akan dilepas. Jika memenuhi syarat, refund dicatat untuk penanganan manual." data-action-label="Batalkan booking">@csrf<button class="btn danger-outline">Batalkan booking</button></form></details>
         @elseif(in_array($booking->status,['held','confirmed']) && $booking->paid_amount)<p class="muted small-copy">Pembatalan mandiri tidak tersedia kurang dari 24 jam sebelum jadwal.</p>@endif
     </section>

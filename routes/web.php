@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Customer\BookingController;
 use App\Http\Controllers\Customer\CourtController;
 use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\Customer\RefundController;
 use App\Http\Controllers\Payments\PaymentController;
 use App\Models\Court;
 use App\Models\Setting;
@@ -25,6 +26,8 @@ Route::middleware('guest')->group(function () {
 Route::post('/midtrans/notification', [PaymentController::class, 'webhook'])->name('midtrans.webhook');
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/refunds', [RefundController::class, 'index'])->name('refunds.index');
+    Route::post('/bookings/{booking}/refund', [RefundController::class, 'store'])->name('refunds.store');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');

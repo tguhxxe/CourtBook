@@ -84,18 +84,21 @@ class BookingService
         });
     }
 
-    public function cancel(Booking $booking): void
+    public function cancel(Booking $booking, ?string $refundReason = null): void
     {
-        $this->atomic(function () use ($booking) {
+        $this->atomic(function () use ($booking, $refundReason) {
             $this->expireLocked();
             $b = $booking->fresh();
+            if ($refundReason !== null && ! $b->paid_amount) {
+                $this->reject('Belum ada pembayaran terverifikasi untuk diajukan refund.');
+            }
             if (! $b->canCancel()) {
                 $this->reject('Booking tidak dapat dibatalkan. Booking berbayar perlu dibatalkan minimal 24 jam sebelum mulai.');
             }
             $b->update(['status' => 'cancelled', 'cancellation_reason' => 'Dibatalkan pelanggan.']);
             Reservation::where('booking_id', $b->id)->delete();
             if ($b->paid_amount) {
-                RefundRequest::firstOrCreate(['reference' => 'cancel-'.$b->id], ['booking_id' => $b->id, 'amount' => $b->paid_amount, 'reason' => 'Pembatalan memenuhi batas 24 jam.']);
+                RefundRequest::firstOrCreate(['reference' => 'cancel-'.$b->id], ['booking_id' => $b->id, 'amount' => $b->paid_amount, 'reason' => $refundReason ?? 'Pembatalan memenuhi batas 24 jam.']);
             }
         });
     }
@@ -117,7 +120,7 @@ class BookingService
                 Reservation::create(['court_id' => $m->court_id, 'starts_at' => $s->copy(), 'maintenance_id' => $m->id]);
             }
 
-return $m;
+            return $m;
         });
     }
 }

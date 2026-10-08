@@ -6,6 +6,7 @@ let timer;
 let busy = false;
 let stopped = false;
 let checks = 0;
+let failures = 0;
 let controller;
 
 function pause(text) {
@@ -43,6 +44,7 @@ async function checkPayment() {
         }
         if (!response.ok) throw new Error('Status unavailable');
         const result = await response.json();
+        failures = 0;
         message.textContent = result.message;
         if (result.terminal) {
             stopped = true;
@@ -53,6 +55,7 @@ async function checkPayment() {
         }
     } catch {
         if (stopped) return;
+        failures += 1;
         message.textContent = 'Status pembayaran belum dapat diperiksa. Akan dicoba lagi; jangan membayar ulang.';
     } finally {
         clearTimeout(timeout);
@@ -60,7 +63,7 @@ async function checkPayment() {
         watcher.removeAttribute('aria-busy');
     }
     checks += 1;
-    if (checks >= 12) {
+    if (failures >= 12 || checks >= 180) {
         pause('Pemeriksaan otomatis dijeda. Jika sudah membayar, periksa status lagi; jangan membayar ulang.');
     } else if (!stopped) {
         timer = setTimeout(checkPayment, 5000);
@@ -69,6 +72,7 @@ async function checkPayment() {
 
 function resume() {
     checks = 0;
+    failures = 0;
     stopped = false;
     checkPayment();
 }

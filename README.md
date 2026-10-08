@@ -74,3 +74,11 @@ Tes memakai SQLite terisolasi in-memory; concurrency memakai database uji file t
 - DESIGN.md dan UX-CONTRACT.md: visual, canonical UI dan perilaku.
 
 Tidak ada push, deploy, perubahan remote, Test Plan final, spreadsheet registrasi, atau persetujuan asisten dalam pekerjaan ini. Audit beban, penetrasi, perangkat nyata/assistive technology lengkap, dan transaksi Sandbox sungguhan adalah tindak lanjut.
+
+
+## Hosting Render + Neon
+Konfigurasi deployment Docker tersedia pada Dockerfile dan render.yaml. Ikuti [panduan Render + Neon](docs/deploy-render-neon.md). Hosting memakai PostgreSQL terpisah, admin awal dari environment, HTTPS proxy dan scheduler selama service aktif. Deploy belum dilakukan; .env dan data localhost tidak diunggah.
+
+
+## Hosting Vercel + Neon
+Konfigurasi PHP komunitas dan aset Vite tersedia pada vercel.json dan api/index.php. Ikuti [panduan Vercel + Neon](docs/deploy-vercel-neon.md). Pilih preset Other, Node 22 dan isi Environment sebelum deploy. Scheduler per menit memerlukan layanan eksternal; belum dikonfigurasi.

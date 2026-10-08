@@ -34,3 +34,6 @@ Praktikan Teguh Setia, NIM 202310370311061, Kelas B. Asisten Modul 1: Alip. Repo
 | NFR-08 | Latensi/beban, audit keamanan menyeluruh, usability dan aksesibilitas lintas device menjadi pengujian lanjutan; belum diklaim selesai |
 
 Data awal: Tennis Court A/B Rp100.000 per jam; Mini Soccer Arena Rp300.000 per jam. Jam 07.00-23.00 WIB setiap hari, tarif sama setiap hari. Alamat contoh Jl. Olahraga Contoh No. 10, Malang (simulasi). Batas/ketentuan rinci di business-rules.md. Identitas lapangan disimpan pada booking sehingga penggantian nama tidak mengubah riwayat.
+
+
+FR-REFUND-01: Pelanggan dapat mengajukan refund pada booking berbayar yang memenuhi batas pembatalan 24 jam dengan alasan, dan memantau nominal, status, serta catatan admin melalui Refund saya. Pengajuan membatalkan booking dan memakai proses refund admin yang ada. Refund terlambat otomatis juga ditampilkan; transfer tetap manual.
