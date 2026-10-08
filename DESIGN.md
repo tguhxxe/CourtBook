@@ -60,6 +60,9 @@ Button emphasis solid/outline/ghost dan intent primary/neutral/danger. Hover/act
 
 Ikon garis SVG orisinal atau simbol panah dengan teks; ilustrasi bukan foto fasilitas sungguhan. Motion 150ms hanya hover/active; reduced-motion menonaktifkannya. Rupiah tanpa pecahan; waktu selalu WIB. Jadwal membedakan tersedia, dipilih, terisi, maintenance dalam teks dan warna. Loading memblok submit duplikat tanpa menggeser kontrol; kegagalan pembayaran tidak mengklaim sukses.
 
+## Guided customer booking
+Alur katalog → jadwal → periksa pesanan → bayar memakai booking-steps.blade.php dengan empat langkah yang sesuai proses nyata. Kalender dan pilihan waktu mendahului informasi fasilitas. Desktop memakai pilihan di kiri dan ringkasan di kanan; ponsel menumpuk dalam urutan yang sama. Jadwal memakai radio native berlabel jam, checkout memakai kartu radio uang muka/lunas. Identitas warna dan tipografi tetap mengikuti token yang ada. CSS tambahan dibatasi pada .booking-flow di resources/css/booking.css; home dan admin tetap mengikuti tampilan sebelumnya. Ketentuan, riwayat, dan pembatalan berada di disclosure native, sementara nominal, batas waktu, serta status pembayaran selalu terlihat.
+
 ## Do's and Don'ts
 - Gunakan ilustrasi simulasi dan status dengan label.
 - Pertahankan layout pelanggan/admin berbeda dengan owner field/feedback/dialog yang sama.

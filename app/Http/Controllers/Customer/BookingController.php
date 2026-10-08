@@ -34,7 +34,7 @@ class BookingController extends Controller
         $s->expire();
         $booking->refresh()->load(['payments', 'refunds']);
 
-        return view('customer.bookings.show', compact('booking'));
+        return view(auth()->user()->role === 'customer' ? 'customer.bookings.checkout' : 'customer.bookings.show', compact('booking'));
     }
 
     public function cancel(Booking $booking, BookingService $s)
