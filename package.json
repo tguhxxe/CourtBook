@@ -6,6 +6,7 @@
         "build": "vite build",
         "dev": "vite",
         "test:browser": "node scripts/browser-check.mjs",
+        "test:home": "node scripts/home-check.mjs",
         "build:vercel": "npm run build && node scripts/vercel-assets.mjs"
     },
     "devDependencies": {

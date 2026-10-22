@@ -68,3 +68,13 @@ Alur katalog → jadwal → periksa pesanan → bayar memakai booking-steps.blad
 - Pertahankan layout pelanggan/admin berbeda dengan owner field/feedback/dialog yang sama.
 - Jangan memakai lime sebagai warna teks kecil di atas putih.
 - Jangan tampilkan key server, payload teknis, atau detail error kanal kepada pelanggan.
+
+## Home page blue refresh
+
+The user requested a blue sports identity and a clearer first-time visitor path, scoped to the homepage on branch `design/home-blue-refresh`. The supplied pickleball/tennis presentation images guide the court photography, condensed athletic type and white space. This is an intentional home pilot; existing global frontmatter tokens remain the application theme for catalogue, booking, account and admin routes.
+
+Runtime ownership remains Model B. `resources/css/home.css`, loaded only by `layouts/home.blade.php`, remaps semantic tokens under `.home-page`: primary `#1455d9`, accent `#d6f05a`, background/surface `#ffffff`, text `#102c59`, muted `#526581`, border `#dce5f0`; home tint is `#edf4ff`. These variables feed links, focus, shared account actions and the inherited scrollbar baseline. No unrelated route receives this stylesheet.
+
+Home typography uses locally hosted Manrope (body, navigation, prices) and Barlow Condensed 700 (hero/section headings), with explicit preload and Latin/Indonesian fallbacks. Typeface sources and licenses are in `resources/fonts`; Vite emits versioned assets. The 76rem grid has one photographic hero, a plain operational-information strip, dynamic court cards, a three-step explanation, FAQ disclosures and a restrained simulation notice. Court photos reserve aspect ratio and are labeled as illustrations. Native disclosures own the mobile navigation and FAQ; the account links still come from the shared `customer-account-links.blade.php` owner used by the original customer layout. `.home-theme` remaps the inherited root scrollbar palette so the shared baseline follows the blue home theme.
+
+For layout exploration, rejected patterns and visual review, see `docs/home-refresh-design.md`. Generated asset provenance and prompts: `docs/home-refresh-assets.md`. The application behavior and booking/payment rules in UX-CONTRACT.md remain authoritative.

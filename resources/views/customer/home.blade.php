@@ -1,8 +1,81 @@
-@extends('layouts.customer')
-@section('title','Waktunya bermain')
+@extends('layouts.home')
+@section('title', 'Waktunya main di lapangan')
 @section('content')
-<section class="hero"><div class="hero-copy"><span class="eyebrow">MALANG, JAWA TIMUR | SPORT CENTER</span><h1>Jadwal pasti.<br><span>Main sepenuh hati.</span></h1><p>Tenis atau mini soccer, pilih lapangan dan waktu terbaik untuk tim Anda. Semua booking dalam satu tempat.</p><div class="actions"><a class="btn primary" href="{{ route('courts.index') }}">Temukan lapangan <span aria-hidden="true">&nearr;</span></a><a class="text-link" href="#cara-booking">Cara booking &darr;</a></div><div class="hero-facts"><span><strong>3 lapangan</strong><small>Tenis & mini soccer</small></span><span><strong>{{ sprintf('%02d.00',$settings->open_hour) }}-{{ sprintf('%02d.00',$settings->close_hour) }}</strong><small>Setiap hari | WIB</small></span><span><strong>DP {{ $settings->dp_percent }}%</strong><small>Atau langsung lunas</small></span></div></div><div class="hero-visual"><div class="visual-top"><span>WAKTUNYA BERMAIN</span><span aria-hidden="true">&nearr;</span></div><x-court-art hero/><div class="visual-bottom"><span>PILIH. BOOKING. BERMAIN.</span><span class="ball" aria-hidden="true"></span></div></div></section>
-<div class="demo-strip"><span class="badge">DATA SIMULASI</span><p>Website praktikum. Tempat dan fasilitas adalah contoh; pembayaran menggunakan Sandbox.</p></div>
-<section class="section"><div class="section-heading"><div><span class="eyebrow">PILIH PERMAINAN ANDA</span><h2>Satu tempat. Dua olahraga.</h2></div><a class="text-link" href="{{ route('courts.index') }}">Semua lapangan &nearr;</a></div><div class="sport-options"><a href="{{ route('courts.index',['sport'=>'tennis']) }}"><span class="sport-symbol" aria-hidden="true">&#9673;</span><span><strong>Tenis</strong><small>Dua hard court, satu permainan seru.</small></span><span aria-hidden="true">&nearr;</span></a><a href="{{ route('courts.index',['sport'=>'soccer']) }}"><span class="sport-symbol" aria-hidden="true">&#9673;</span><span><strong>Mini soccer</strong><small>Bawa tim, pilih waktu, mulai bermain.</small></span><span aria-hidden="true">&nearr;</span></a></div><div class="court-grid">@foreach($courts as $court)<x-court-card :court="$court"/>@endforeach</div></section>
-<section class="how-section" id="cara-booking"><div><span class="eyebrow">DARI RENCANA KE LAPANGAN</span><h2>Booking tanpa<br>bolak-balik chat.</h2><p>Pilih jadwal, cek tagihan, lalu siapkan permainan Anda.</p></div><ol class="steps"><li><span>01</span><div><h3>Pilih lapangan & waktu</h3><p>Lihat ketersediaan. Booking 1-4 jam, hingga 30 hari ke depan.</p></div></li><li><span>02</span><div><h3>Selesaikan pembayaran</h3><p>Bayar DP {{ $settings->dp_percent }}% atau lunas dalam 15 menit. Tunggu verifikasi pembayaran.</p></div></li><li><span>03</span><div><h3>Datang, lalu bermain</h3><p>Lunasi sisa tagihan paling lambat 2 jam sebelum jadwal.</p></div></li></ol></section><section class="section"><x-terms/></section>
+<section class="home-hero" aria-labelledby="home-title">
+    <img class="home-hero-image" src="{{ asset('images/home/blue-tennis-hero.webp') }}" width="1942" height="809" alt="" fetchpriority="high">
+    <div class="home-hero-shade" aria-hidden="true"></div>
+    <div class="home-wrap home-hero-inner">
+        <div class="home-hero-copy">
+            <p class="home-location"><x-home-icon name="pin"/> Tenis & mini soccer di Malang</p>
+            <h1 id="home-title">Waktunya main.<br>Di lapangan.</h1>
+            <p class="home-hero-description">Pilih lapangan dan waktu yang pas. Pesan online untuk sesi tenis atau mini soccer berikutnya.</p>
+            <div class="home-hero-actions">
+                <a class="home-button home-button-light" href="{{ route('courts.index') }}">Cari lapangan <x-home-icon name="arrow"/></a>
+                <a class="home-hero-guide" href="#cara-booking">Lihat cara booking <x-home-icon name="chevron"/></a>
+            </div>
+            <p class="home-hero-note"><x-home-icon name="check"/> Lihat jadwal tanpa perlu masuk</p>
+        </div>
+        <span class="home-image-caption">Ilustrasi olahraga</span>
+    </div>
+</section>
+
+<div class="home-quick-info">
+    <div class="home-wrap home-info-grid">
+        <div class="home-info-item"><x-home-icon name="clock"/><div><span>Jam operasional</span><strong>{{ sprintf('%02d.00', $settings->open_hour) }}–{{ sprintf('%02d.00', $settings->close_hour) }} WIB</strong></div></div>
+        <div class="home-info-item"><x-home-icon name="calendar"/><div><span>Sesuaikan waktu main</span><strong>Booking 1–{{ config('courtbook.max_duration') }} jam</strong></div></div>
+        <div class="home-info-item"><x-home-icon name="wallet"/><div><span>Pilihan pembayaran</span><strong>DP {{ $settings->dp_percent }}% atau lunas</strong></div></div>
+    </div>
+</div>
+
+<section class="home-wrap home-section home-courts" aria-labelledby="home-courts-title">
+    <div class="home-section-heading">
+        <div><h2 id="home-courts-title">Pilih lapanganmu.</h2><p>Untuk latihan rutin, main santai, atau kumpul satu tim.</p></div>
+        <a class="home-inline-link" href="{{ route('courts.index') }}">Lihat semua lapangan <x-home-icon name="arrow"/></a>
+    </div>
+    <div class="home-court-grid">
+        @forelse($courts as $court)
+            <article class="home-court">
+                <a class="home-court-image-link" href="{{ route('courts.show', $court) }}" aria-label="Lihat jadwal {{ $court->name }}">
+                    <img src="{{ asset('images/home/'.($court->sport === 'soccer' ? 'mini-soccer' : 'blue-tennis-court').'.webp') }}" width="1536" height="1024" alt="Ilustrasi {{ $court->sport === 'soccer' ? 'lapangan mini soccer' : 'lapangan tenis hard court' }}" loading="lazy" @class(['home-court-image', 'home-court-image-alternate' => $loop->index === 1])>
+                    <span class="home-sport-label">{{ $court->sport === 'soccer' ? 'Mini soccer' : 'Tenis' }}</span>
+                </a>
+                <div class="home-court-content">
+                    <h3><a href="{{ route('courts.show', $court) }}">{{ $court->name }}</a></h3>
+                    <p class="home-court-facilities">{{ $court->sport === 'soccer' ? 'Arena rumput sintetis untuk bermain bersama tim.' : 'Hard court untuk latihan dan permainan berikutnya.' }}</p>
+                    @if(count($court->facilities ?? []))
+                        <ul class="home-facilities" aria-label="Fasilitas {{ $court->name }}">
+                            @foreach(array_slice($court->facilities, 0, 2) as $facility)<li><x-home-icon name="check"/>{{ $facility }}</li>@endforeach
+                        </ul>
+                    @endif
+                    <div class="home-court-booking"><p><strong>Rp{{ number_format($court->hourly_rate, 0, ',', '.') }}</strong><span> / jam</span></p><a class="home-schedule-link" href="{{ route('courts.show', $court) }}" aria-label="Lihat jadwal {{ $court->name }}">Lihat jadwal <x-home-icon name="arrow"/></a></div>
+                </div>
+            </article>
+        @empty
+            <div class="home-empty"><h3>Lapangan sedang disiapkan.</h3><p>Belum ada lapangan yang bisa ditampilkan. Silakan cek kembali nanti.</p><a class="home-inline-link" href="{{ route('courts.index') }}">Buka daftar lapangan <x-home-icon name="arrow"/></a></div>
+        @endforelse
+    </div>
+    <p class="home-photo-note">Gambar merupakan ilustrasi, bukan foto lokasi sebenarnya.</p>
+</section>
+
+<section class="home-how" id="cara-booking" aria-labelledby="home-how-title">
+    <div class="home-wrap home-how-grid">
+        <div class="home-how-intro"><span class="home-court-mark" aria-hidden="true"><x-logo/></span><h2 id="home-how-title">Dari pilih jadwal<br>sampai siap main.</h2><p>Pertama kali booking? Mulai dari tiga langkah sederhana ini.</p><a class="home-button home-button-blue" href="{{ route('courts.index') }}">Cari lapangan <x-home-icon name="arrow"/></a></div>
+        <ol class="home-booking-steps">
+            <li><span class="home-step-number" aria-hidden="true">1</span><div><h3>Pilih lapangan dan jadwal</h3><p>Buka lapangan pilihanmu, cek jam yang tersedia, lalu tentukan tanggal dan durasi bermain.</p></div></li>
+            <li><span class="home-step-number" aria-hidden="true">2</span><div><h3>Periksa pesanan, lalu bayar</h3><p>Masuk atau buat akun untuk memesan. Bayar DP {{ $settings->dp_percent }}% atau lunas dalam {{ config('courtbook.hold_minutes') }} menit. Tunggu pembayaran terverifikasi.</p></div></li>
+            <li><span class="home-step-number" aria-hidden="true">3</span><div><h3>Siapkan tim. Waktunya main!</h3><p>Pastikan booking terkonfirmasi. Jika memilih DP, lunasi sisanya paling lambat {{ config('courtbook.lead_hours') }} jam sebelum jadwal.</p></div></li>
+        </ol>
+    </div>
+</section>
+
+<section class="home-wrap home-section home-faq" aria-labelledby="home-faq-title">
+    <div class="home-faq-intro"><h2 id="home-faq-title">Sebelum mulai main.</h2><p>Beberapa hal yang perlu kamu tahu sebelum memesan lapangan.</p></div>
+    <div class="home-faq-list">
+        <details><summary>Perlu akun untuk melihat jadwal? <x-home-icon name="plus"/></summary><div class="home-faq-answer"><p>Tidak. Lapangan dan jadwal dapat dilihat tanpa masuk. Kamu baru perlu masuk atau membuat akun saat ingin memesan.</p></div></details>
+        <details><summary>Apakah harus langsung bayar lunas? <x-home-icon name="plus"/></summary><div class="home-faq-answer"><p>Kamu bisa membayar DP {{ $settings->dp_percent }}% atau langsung lunas. Booking dikonfirmasi setelah pembayaran terverifikasi. Jika memilih DP, sisa tagihan harus lunas paling lambat {{ config('courtbook.lead_hours') }} jam sebelum bermain.</p></div></details>
+        <details><summary>Bagaimana ketentuan pembatalannya? <x-home-icon name="plus"/></summary><div class="home-faq-answer"><x-terms/></div></details>
+    </div>
+</section>
+
+<aside class="home-wrap home-demo" aria-label="Informasi simulasi"><span class="home-demo-label">Data simulasi</span><p>Website praktikum. Tempat dan fasilitas merupakan contoh; pembayaran menggunakan Sandbox. Tema masih membutuhkan persetujuan asisten.</p></aside>
 @endsection

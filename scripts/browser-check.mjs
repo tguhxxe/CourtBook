@@ -1,11 +1,13 @@
 import { chromium, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
-const base = 'http://127.0.0.1:8000';
-const output = 'docs/evidence';
+const base = process.env.COURTBOOK_BASE_URL || 'http://127.0.0.1:8000';
+const output = process.env.COURTBOOK_BROWSER_OUTPUT || 'docs/evidence';
 await mkdir(output, { recursive: true });
 const report = { executedAt: new Date().toISOString(), base, checks: [], accessibility: [], errors: [] };
-const browser = await chromium.launch();
+const browser = await chromium.launch({
+ executablePath: process.env.COURTBOOK_BROWSER_EXECUTABLE || undefined,
+});
 let page;
 async function check(name, action) { await action(); report.checks.push({ name, passed: true }); console.log('PASS', name); }
 async function audit(name) {
@@ -19,7 +21,7 @@ const date = new Date(Date.now()+2*86400000).toLocaleDateString('en-CA',{timeZon
 try {
  const context = await browser.newContext({ viewport:{width:1440,height:1000}, locale:'id-ID', timezoneId:'Asia/Jakarta' }); page = await context.newPage();
  page.on('pageerror', e => report.errors.push(e.message));
- await check('Desktop home and keyboard skip link', async () => { await page.goto(base); await expect(page.getByRole('heading',{name:'Jadwal pasti. Main sepenuh hati.'})).toBeVisible(); await page.keyboard.press('Tab'); await expect(page.getByRole('link',{name:'Lewati ke konten'})).toBeFocused(); await page.screenshot({path:output+'/home-desktop.png',fullPage:true}); await layout('home desktop'); });
+ await check('Desktop home and keyboard skip link', async () => { await page.goto(base); await expect(page.getByRole('heading',{name:'Waktunya main. Di lapangan.'})).toBeVisible(); await page.keyboard.press('Tab'); await expect(page.getByRole('link',{name:'Lewati ke konten'})).toBeFocused(); await page.screenshot({path:output+'/home-desktop.png',fullPage:true}); await layout('home desktop'); });
  await audit('home desktop');
  await check('Search no-results and accessible clear', async () => {await page.goto(base+'/courts?q=does-not-exist');await expect(page.getByRole('heading',{name:'Lapangan tidak ditemukan'})).toBeVisible();await page.getByRole('button',{name:'Hapus pencarian',exact:true}).click();await expect(page.getByRole('heading',{name:'Tennis Court A'})).toBeVisible();});
  await check('Login error preserves email and shows invalid state',async()=>{await page.goto(base+'/login');await page.getByLabel('Email',{exact:true}).fill('pelanggan@courtbook.test');await page.getByLabel('Kata sandi',{exact:true}).fill('wrong');await page.getByRole('button',{name:'Masuk',exact:false}).click();await expect(page.getByRole('alert')).toContainText('Email atau kata sandi tidak sesuai');await expect(page.getByLabel('Email',{exact:true})).toHaveValue('pelanggan@courtbook.test');await expect(page.getByLabel('Email',{exact:true})).toHaveAttribute('aria-invalid','true');});
