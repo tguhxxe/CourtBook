@@ -66,6 +66,15 @@ Verification used Linux Chrome. Windows, physical touch devices, a full 200% zoo
 
 ## Review and rollback
 
+Maintenance entry points:
+
+- `resources/views/components/home/navbar.blade.php`: desktop/mobile navigation and account-menu placement.
+- `resources/views/components/home/footer.blade.php`: footer identity, links and copyright.
+- `resources/views/components/home/payment-methods.blade.php`: payment logo list and caption, composed by the footer.
+- `resources/views/components/customer-account-links.blade.php`: shared guest/customer/admin account links.
+- `resources/views/layouts/home.blade.php`: page shell, assets, feedback and content slot; composes the navbar/footer components.
+- `resources/css/home.css`: existing theme and responsive styling, shared by these components.
+
 Run the current branch with `docker compose up --build -d`, then open http://127.0.0.1:8000. To restore the original design without discarding this branch:
 
 ```sh
@@ -74,3 +83,5 @@ docker compose up --build -d
 ```
 
 This refresh introduces no database migrations or payment/business-rule changes. The preview images, court descriptions and venue remain simulated.
+
+Navbar/footer extraction verification: all 87 application tests passed. The rendered navbar/footer DOM and screenshot hashes before/after extraction matched at 1440px and 390px; the mobile menu opened successfully. The strict premium audit reported zero findings, and Docker rebuilt and started successfully. This is a structure-only refactor; existing CSS and booking behavior are retained.
