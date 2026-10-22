@@ -1,5 +1,8 @@
 import './booking';
 import './payments';
+document.querySelectorAll('.home-mobile-menu a[href]').forEach(link => link.addEventListener('click', () => {
+    link.closest('details').open = false;
+}));
 const dialog = document.querySelector('#confirm-dialog');
 let pendingAction = null;
 let origin = null;

@@ -14,6 +14,8 @@
 }
 /* This home theme is the first migration surface; other routes retain their theme. */
 .home-theme {
+    --home-nav-height: 98px;
+    scroll-padding-top: calc(var(--home-nav-height) + 1rem);
     --scroll-thumb: #8fa7ca;
     --scroll-track: #edf4ff;
     --scroll-hover: #526581;
@@ -43,7 +45,7 @@
 .home-page a, .home-page summary, .home-page button { -webkit-tap-highlight-color: transparent; }
 .home-page a:active, .home-page summary:active { opacity: .85; }
 .home-wrap { width: min(var(--page-max), calc(100% - 4rem)); margin-inline: auto; }
-.home-header { background: var(--color-surface); position: relative; z-index: 10; }
+.home-header { background: var(--color-surface); position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 0 var(--color-border); }
 .home-navbar { min-height: 98px; display: flex; align-items: center; gap: 3rem; justify-content: space-between; }
 .home-brand { display: inline-flex; align-items: center; gap: .6rem; font-size: 1.55rem; font-weight: 800; letter-spacing: -.065em; line-height: 1; white-space: nowrap; }
 .home-brand > svg { color: var(--color-primary); width: 34px; height: 34px; }
@@ -194,6 +196,7 @@
     .home-faq { gap: 3rem; }
 }
 @media (max-width: 800px) {
+    .home-theme { --home-nav-height: 82px; }
     .home-payment-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .home-wrap { width: calc(100% - 2.5rem); }
     .home-navbar { min-height: 82px; flex-wrap: wrap; gap: 0; }
@@ -203,7 +206,7 @@
     .home-mobile-menu { display: block; }
     .home-mobile-menu summary { position: absolute; right: 1.25rem; top: 19px; display: flex; align-items: center; justify-content: end; gap: .5rem; min-height: 44px; cursor: pointer; list-style: none; font-size: .8rem; font-weight: 800; }
     .home-mobile-menu summary:hover { color: var(--color-primary); }
-    .home-mobile-menu[open] nav { padding-block: 1rem; border-top: 1px solid var(--color-border); display: grid; gap: .3rem; }
+    .home-mobile-menu[open] nav { padding-block: 1rem; border-top: 1px solid var(--color-border); display: grid; gap: .3rem; max-height: calc(100dvh - var(--home-nav-height)); overflow-y: auto; }
     .home-mobile-menu nav a { padding: .55rem .7rem; border-radius: 5px; font-size: .85rem; }
     .home-mobile-menu nav a:hover { background: var(--home-tint); }
     .home-mobile-menu nav .btn.primary { justify-content: center; margin-top: .5rem; }
@@ -231,6 +234,7 @@
     .home-faq-intro p { max-width: 50ch; }
 }
 @media (max-width: 540px) {
+    .home-theme { --home-nav-height: 78px; }
     .home-payments { padding-block: 1.5rem 1.8rem; }
     .home-payment-logos { gap: .5rem; }
     .home-payment-logos li { min-height: 54px; padding: .6rem; }

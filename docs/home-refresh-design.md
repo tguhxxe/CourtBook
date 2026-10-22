@@ -120,3 +120,9 @@ Alternative: three floating icon cards — rejected; repeats a generic card kit.
 Critique: the old timeline is clear but visually anonymous. The new signature is one continuous court-like panel, not three boxes. Numbering conveys the actual order. Limit decorative court marks to the sequence rail; preserve payment verification and dynamic deadlines. Component owner: `components/home/booking-guide.blade.php`; styling remains in home.css.
 
 Booking guide verification: all 87 application tests (320 assertions) and the production Vite build passed. Docker rebuilt successfully; app and scheduler are healthy. Read-only Chrome checks at 320/390/768/1024/1440px found no page overflow or clipped steps. Desktop/mobile axe scans returned zero violations; keyboard Enter on the catalogue action reached /courts, reduced motion retained all steps, and no page errors occurred. Desktop and mobile screenshots were inspected. Strict static audit: zero findings; DESIGN.md lint: zero errors and six existing legacy token warnings. This change introduces no booking logic or payment state changes.
+
+### Sticky home navigation
+
+Keep the accepted white/blue navbar, typography and spacing. Use CSS sticky at top: 0, with a subtle divider and document scroll padding for anchor destinations. Preserve normal document flow so the hero does not jump. The mobile disclosure closes when navigating and supports internal scrolling on short viewports; no scroll animations or extra controls.
+
+Sticky navbar verification: home tests (2 tests, 8 assertions), production build and Docker rebuild passed. Chrome at 320/390/768/1440px confirmed header top stays at 0 while scrolling, anchor targets remain below the navbar, mobile navigation closes, and no horizontal overflow occurs. Header axe scans at 390/1440px returned zero violations; screenshot inspected. Strict static audit returned zero findings; DESIGN lint has zero errors with the six existing legacy warnings.
