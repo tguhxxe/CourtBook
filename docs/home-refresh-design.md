@@ -212,3 +212,24 @@ Mobile: date → duration/time → summary, without decorative photograph.
 A full photographic hero was rejected because it delays schedule selection. The compact photo is the single sports accent; the actual controls remain on quiet white surfaces. Extend canonical booking-flow/field/radio/select components through court-schedule styling, retaining data hooks, explicit date submit, stale-date blocking, duration-fit availability and server validation. Native date/select popup behavior stays accepted. Summary sticks below the shared navbar only when the viewport can accommodate it. No new booking/payment states or fabricated availability.
 
 Schedule verification: 87 PHP tests (320 assertions), Vite production build and Docker rebuild passed. Full isolated browser regression passed 15 checks/8 axe scans, including booking/cancellation and admin maintenance. Dedicated /courts/3 checks at 320/390/768/1024/1440px passed with no overflow and three additional axe scans without violations. Covered guest action, reserved/maintenance labels, keyboard radio selection, two-hour total/DP for mini soccer, clearing a selection when duration no longer fits, stale-date submit blocking, fully unavailable day recovery, keyboard court-information disclosure, summary below navbar and static on short screens, long names, reduced motion and successful two-hour booking creation. Fixtures and booking creation exist only in /tmp test SQLite. Desktop/mobile screenshots were inspected. Strict audit: zero findings; DESIGN lint: zero errors with six existing legacy token warnings. Native date/select popups retain OS formatting by the maintained contract. Availability, payment rules and controllers were not modified.
+
+### Court schedule rebuild from supplied presentation reference
+
+The user rejected the previous mini-photo plus several booking panels as confusing. Supersede that composition. The supplied reference uses large condensed sports typography, strong court photography and quiet reading surfaces. Retain court blue #1455d9, navy #102c59, white #ffffff, ice #edf4ff and slate #526581; Barlow Condensed for identity, Manrope for controls. Left-align controls and explanatory copy.
+
+```text
+[nav]
+[navy court title / tariff | large photograph, like reference slide]
+[canonical booking progress]
+[one booking sheet]
+  date / show schedule / today-tomorrow
+  duration
+  labelled available-time grid
+  selected time → total + DP/balance → continue
+  supplementary venue disclosure
+[footer]
+```
+
+Reject keeping the side summary with different colors: it still divides attention between date above, radios left and amounts right. Use one vertical decision sequence, six time columns on desktop/three on mobile, and no sticky summary. The compact price/action footer is the final step in the same sheet. Payment explanations are shortened without removing hold/no-reschedule rules, DP amounts or confirmation requirements. Native controls, existing form/data hooks and server rules remain canonical; the photograph stays an illustration, not venue evidence.
+
+Reference rebuild verification: 87 PHP tests (320 assertions), production build and Docker rebuild passed. Full browser regression passed 15 checks/8 axe scans. Dedicated court-3 checks at 320/390/768/1024/1440px passed: available/reserved/maintenance radios, keyboard selection, duration-dependent price/DP, invalidated selection for insufficient time, stale-date blocking, a fully unavailable date, venue disclosure, long names, reduced motion and successful two-hour booking. Three additional axe scans returned zero violations; no page errors/overflow. Desktop/mobile screenshots were inspected against the supplied reference: large sports identity/photo, a single quiet booking sequence and a compact amount/action footer replace the rejected multi-panel composition. The summary is now static on every viewport. Strict audit has zero findings; DESIGN lint has zero errors with six existing legacy token warnings. Test bookings/maintenance remain in temporary SQLite only. Native popup formatting and the server payment/availability rules are retained.

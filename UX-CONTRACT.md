@@ -53,3 +53,6 @@ Customer-only checkout uses customer/bookings/checkout.blade.php; admin retains 
 
 ## Customer refund
 RefundController and BookingService own the customer refund flow. Refund saya lists only requests whose booking belongs to the signed-in customer, ten per page, with amount, reason, progress, dates and admin notes. The shared customer-refund-form uses the canonical field, confirmation dialog and feedback components. Submitting a reason cancels a paid booking under the existing 24-hour rule and creates the same cancel reference consumed by admin; no client-controlled amount or status is accepted. Unpaid bookings retain cancellation without refund. Repeat, expired, ineligible and cross-owner submissions cannot create new refunds. Refund transfers remain manual.
+
+## Court schedule reference revision
+/courts/{court} now uses one vertical decision sequence: date GET form → duration/time radios → summary and continue. The previous desktop side summary was explicitly rejected by the user. Checkout retains its existing columns. Native control ownership, explicit date reload/stale-date blocking, pricing calculations, radio semantics, server validation and payment/booking transitions are unchanged.
