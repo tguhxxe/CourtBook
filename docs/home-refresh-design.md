@@ -126,3 +126,18 @@ Booking guide verification: all 87 application tests (320 assertions) and the pr
 Keep the accepted white/blue navbar, typography and spacing. Use CSS sticky at top: 0, with a subtle divider and document scroll padding for anchor destinations. Preserve normal document flow so the hero does not jump. The mobile disclosure closes when navigating and supports internal scrolling on short viewports; no scroll animations or extra controls.
 
 Sticky navbar verification: home tests (2 tests, 8 assertions), production build and Docker rebuild passed. Chrome at 320/390/768/1440px confirmed header top stays at 0 while scrolling, anchor targets remain below the navbar, mobile navigation closes, and no horizontal overflow occurs. Header axe scans at 390/1440px returned zero violations; screenshot inspected. Strict static audit returned zero findings; DESIGN lint has zero errors with the six existing legacy warnings.
+
+### Minimal booking guide revision
+
+The user found the bordered playbook too busy. Retain navy #102c59, blue #1455d9, white #ffffff, ice #edf4ff and slate #526581, with the existing Barlow heading and Manrope reading text. Simplify to three open, left-aligned steps: an unframed number beside a short heading, then one paragraph. Preserve the navy section and catalogue action. One section divider provides structure; remove the cell borders, connector rails, icon row, circular number badges and secondary captions.
+
+```text
+Chosen:   1  Pilih jadwal       2  Pesan dan bayar       3  Bersiap main
+             paragraph             paragraph                paragraph
+Mobile: same order, stacked with open space.
+Rejected: smaller outlined cards — still repeats the visual clutter.
+```
+
+Critique: sports identity already comes from Barlow typography and the blue court palette. Extra court marks add no help to this instructional section. Shortening the headings and merging repeated captions into the paragraphs improves scanning while preserving login, DP, verification and balance deadlines.
+
+Minimal guide verification: home tests passed (2 tests, 8 assertions), Vite build passed, Docker app/scheduler healthy. Chrome checks at 320/390/768/1024/1440px found no horizontal overflow or clipped steps. Desktop/mobile axe scans returned zero violations; keyboard navigation reached the catalogue, reduced motion preserved all steps, and no page errors occurred. Both screenshots inspected: open spacing and shorter headings remove the earlier crowded treatment. Strict audit: zero findings. DESIGN lint: zero errors, six existing legacy token warnings.

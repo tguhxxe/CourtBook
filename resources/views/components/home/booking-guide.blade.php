@@ -11,22 +11,25 @@
         </div>
         <ol class="home-booking-steps" role="list">
             <li>
-                <div class="home-step-rail" aria-hidden="true"><span class="home-step-number">1</span><x-home-icon name="calendar"/></div>
-                <h3>Pilih lapangan<br>dan jadwal.</h3>
-                <p>Cek jam yang tersedia, lalu tentukan tanggal dan durasi bermain di lapangan pilihanmu.</p>
-                <span class="home-step-detail">Lihat jadwal tanpa perlu masuk</span>
+                <span class="home-step-number" aria-hidden="true">1</span>
+                <div>
+                    <h3>Pilih jadwal.</h3>
+                    <p>Lihat lapangan tanpa perlu masuk. Pilih tanggal, jam yang tersedia, dan durasi bermain.</p>
+                </div>
             </li>
             <li>
-                <div class="home-step-rail" aria-hidden="true"><span class="home-step-number">2</span><x-home-icon name="wallet"/></div>
-                <h3>Periksa pesanan.<br>Lanjutkan pembayaran.</h3>
-                <p>Masuk atau buat akun untuk memesan. Bayar DP {{ $settings->dp_percent }}% atau lunas dalam {{ config('courtbook.hold_minutes') }} menit.</p>
-                <span class="home-step-detail">Tunggu pembayaran terverifikasi</span>
+                <span class="home-step-number" aria-hidden="true">2</span>
+                <div>
+                    <h3>Pesan dan bayar.</h3>
+                    <p>Masuk atau buat akun. Periksa pesanan, bayar DP {{ $settings->dp_percent }}% atau lunas dalam {{ config('courtbook.hold_minutes') }} menit, lalu tunggu pembayaran terverifikasi.</p>
+                </div>
             </li>
             <li>
-                <div class="home-step-rail" aria-hidden="true"><span class="home-step-number">3</span><x-home-icon name="tennis"/></div>
-                <h3>Pastikan konfirmasi.<br>Waktunya main!</h3>
-                <p>Pastikan booking sudah terkonfirmasi. Jika memilih DP, lunasi sisanya paling lambat {{ config('courtbook.lead_hours') }} jam sebelum jadwal.</p>
-                <span class="home-step-detail">Siapkan perlengkapan dan timmu</span>
+                <span class="home-step-number" aria-hidden="true">3</span>
+                <div>
+                    <h3>Bersiap main.</h3>
+                    <p>Pastikan booking terkonfirmasi. Jika memilih DP, lunasi sisanya paling lambat {{ config('courtbook.lead_hours') }} jam sebelum jadwal.</p>
+                </div>
             </li>
         </ol>
     </div>
