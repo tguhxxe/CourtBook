@@ -39,7 +39,7 @@ Admin tabel 15 baris, booking pelanggan 10, katalog 9. Search/filter/page melalu
 | Profile | Simpan profil | submit disabled | profil | status tersimpan | kata sandi saat ini wajib untuk ubah password | ringkasan | FR-PROFILE-01 |
 
 ## Navigation and responsive behavior
-Title tiap route bahasa Indonesia. Error 403/404/419/429/500 memiliki halaman dengan navigasi. Native input/select sesuai keyboard platform. Sidebar admin wrap pada 720px; detail/checkout stack, tabel tetap scroll. Tidak memotong kode transaksi (overflow-wrap). Sticky hanya checkout desktop. Back menggunakan link nyata.
+Title tiap route bahasa Indonesia. Error 403/404/419/429/500 memiliki halaman dengan navigasi. Native input/select sesuai keyboard platform. Sidebar admin wrap pada 720px; detail/checkout stack, tabel tetap scroll. Tidak memotong kode transaksi (overflow-wrap). Sticky untuk navbar home/katalog dan ringkasan checkout desktop. Back menggunakan link nyata.
 
 ## Overlays and feedback
 Native dialog aplikasi, fokus awal tombol kembali, Escape menutup, browser menjaga fokus/inert background. app.js memulihkan trigger. Konfirmasi pembatalan, penghapusan, pelepasan maintenance, pengaturan operasional/refund. Tidak ada konfirmasi save profil/katalog rutin. Data-dirty pada edit profil/katalog/maintenance: dialog in-app; beforeunload hanya lifecycle unload. Feedback critical inline, bukan transient toast. Password masked, tombol show/hide dengan aria-pressed.

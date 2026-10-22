@@ -6,7 +6,7 @@
         </div>
         <nav aria-label="Navigasi footer">
             <a href="{{ route('courts.index') }}">Cari lapangan</a>
-            <a href="#cara-booking">Cara booking</a>
+            <a href="{{ request()->routeIs('home') ? '#cara-booking' : route('home').'#cara-booking' }}">Cara booking</a>
             @guest<a href="{{ route('login') }}">Masuk</a>@else<a href="{{ route('bookings.index') }}">Booking saya</a>@endguest
         </nav>
     </div>

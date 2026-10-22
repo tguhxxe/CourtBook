@@ -141,3 +141,21 @@ Rejected: smaller outlined cards — still repeats the visual clutter.
 Critique: sports identity already comes from Barlow typography and the blue court palette. Extra court marks add no help to this instructional section. Shortening the headings and merging repeated captions into the paragraphs improves scanning while preserving login, DP, verification and balance deadlines.
 
 Minimal guide verification: home tests passed (2 tests, 8 assertions), Vite build passed, Docker app/scheduler healthy. Chrome checks at 320/390/768/1024/1440px found no horizontal overflow or clipped steps. Desktop/mobile axe scans returned zero violations; keyboard navigation reached the catalogue, reduced motion preserved all steps, and no page errors occurred. Both screenshots inspected: open spacing and shorter headings remove the earlier crowded treatment. Strict audit: zero findings. DESIGN lint: zero errors, six existing legacy token warnings.
+
+### Blue court catalogue
+
+Extend the approved home theme to /courts on the same design branch. Palette: blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581. Local Barlow Condensed owns the athletic page/court headings; Manrope owns filters and reading text. Left-align all content. Reuse layouts/home, shared navbar/footer, booking-steps, field and the home court-card component. Native sport select and explicit GET search remain canonical; nine results per page with query preservation.
+
+```text
+[shared sticky navigation]
+[pale blue: booking stages / Pick your court / short guidance]
+[name search            sport select       Search / Reset]
+[Available courts                          result count]
+[photo court card] [photo court card] [photo court card]
+[pagination / illustration disclaimer]
+[shared footer]
+```
+
+A second photographic hero was rejected: photos already provide identity in the reusable court cards, and the catalogue should reach the filters quickly. No new decorative badges or availability claims. Empty results and validation retain visible recovery. Shared navbar resolves the current route and links back to the home guide from the catalogue. Only catalogue joins the blue shell; schedule/checkout keep their existing implementation in this task.
+
+Catalogue verification: all 87 PHP tests (320 assertions) and production Vite build passed. Full browser flow passed 15 checks/8 axe scans against isolated SQLite, including customer booking/cancellation and admin CRUD. Home regression passed 13 checks/5 axe scans after updating its expected catalogue theme; full-flow logout now opens the shared account menu. Dedicated catalogue inspection covered 320/390/768/1024/1440px, search/clear/sport filters, empty state, validation with focused summary, schedule keyboard navigation, home guide links, long names and reduced motion. Three catalogue axe scans and an additional 320px pagination scan returned zero violations. Eleven temporary fixture courts verified the 9/2 page split, previous/next boundaries, retained query/filter/page and keyboard navigation. Fixture data exists only in the temporary test database. Desktop/mobile screenshots were inspected. Docker app/scheduler are healthy; read-only inspection confirmed blue tokens and loaded footer payment logos. Strict audit: zero findings; DESIGN lint: zero errors, six existing legacy token warnings. No payment logic, schema or customer data changed; schedule/checkout retain their previous theme.

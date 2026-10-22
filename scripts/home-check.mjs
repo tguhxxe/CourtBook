@@ -31,7 +31,7 @@ try {
     await check('Primary action opens the existing court catalogue', async () => {
         await page.locator('.home-hero-actions').getByRole('link', { name: 'Cari lapangan', exact: true }).click();
         await expect(page).toHaveURL(`${base}/courts`);
-        expect(await page.locator('body').evaluate(body => body.classList.contains('home-page'))).toBe(false);
+        expect(await page.locator('body').evaluate(body => body.classList.contains('home-page'))).toBe(true);
         await page.goto(base);
         await page.locator('.home-schedule-link').first().click();
         await expect(page).toHaveURL(/\/courts\/\d+$/);
