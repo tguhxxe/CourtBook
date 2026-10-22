@@ -192,59 +192,71 @@
 .order-heading figcaption { position: absolute; bottom: .7rem; left: .7rem; background: #102c59ed; color: white; font-size: .65rem; padding: .2rem .5rem; border-radius: 3px; }
 .order-detail .booking-steps { max-width: 780px; margin: 1.3rem auto 0; }
 .order-detail .booking-steps .step-number { font-family: var(--font-body); }
-.order-sheet { max-width: 64rem; margin-inline: auto; padding-top: 2rem; }
+.order-sheet { max-width: 56rem; margin-inline: auto; padding-top: 2rem; font-size: 16px; }
 .home-page .order-detail .panel { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
 .home-page .order-detail h2 { font-size: 2rem; font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
 .order-detail .eyebrow { display: none; }
-.order-detail .notice { font-size: .875rem; overflow-wrap: anywhere; }
-.order-detail .order-summary > h2 { font-size: 2.6rem; margin-bottom: 1.3rem; }
-.order-detail .schedule-summary { display: grid; grid-template-columns: 1.3fr 1fr .6fr; gap: 1.3rem; margin-block: 0 1.3rem; }
-.order-detail .schedule-summary small { font-size: .75rem; }
-.order-detail .schedule-summary strong { font-size: .95rem; margin-top: .3rem; }
-.order-detail .actions { gap: .5rem; }
-.order-detail .badge { white-space: normal; }
-.order-detail .price-summary { margin-top: 1.5rem; }
-.order-detail .price-summary > div { font-size: .9rem; align-items: baseline; padding-block: .9rem; }
-.order-detail .price-summary dt { max-width: 60%; }
+.order-detail .notice { font-size: .95rem; overflow-wrap: anywhere; }
+.order-ticket { display: grid; grid-template-columns: 1.15fr 1fr; border: 1px solid var(--color-border); border-top: 4px solid var(--color-primary); border-radius: 6px; overflow: hidden; }
+.order-ticket-match { padding: 1.6rem; }
+.home-page .order-ticket h2 { font-size: 2.2rem; margin-bottom: 1.3rem; }
+.order-time { margin: 0 0 1.3rem; }
+.order-time > div + div { margin-top: 1rem; }
+.order-time dt { font-size: .8rem; color: var(--color-muted); margin-bottom: .25rem; }
+.order-time dd { margin: 0; font-size: .95rem; font-weight: 700; line-height: 1.65; }
+.order-time dd span { font-weight: 500; color: var(--color-muted); }
+.order-detail .actions { gap: .45rem; }
+.order-detail .badge { white-space: normal; font-size: .75rem; }
+.order-detail .price-summary { margin: 0; padding: 1.6rem; background: #f6f9fd; border-left: 1px solid var(--color-border); align-content: center; }
+.order-detail .price-summary > div { font-size: .9rem; align-items: baseline; padding-block: .8rem; }
+.order-detail .price-summary dt { max-width: 57%; }
+.order-detail .price-summary dt small { display: block; color: var(--color-muted); font-size: .75rem; margin-top: .25rem; }
 .order-detail .price-summary dd { white-space: normal; overflow-wrap: anywhere; text-align: right; }
-.order-detail .price-summary .total dd { font-family: var(--font-display); font-size: 2.3rem; font-weight: 700; line-height: 1.2; }
-.order-change-note { font-size: .8rem; color: var(--color-muted); margin: 0; }
-.home-page .order-detail .flow-summary { position: static; padding: 1.8rem; border-radius: 8px; background: var(--home-tint); margin-block: 2rem; }
-.order-detail .flow-summary > p { font-size: .9rem; max-width: 70ch; }
-.order-detail .payment-options:has(input[type=radio]) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-.order-detail .payment-options > .field-error { grid-column: 1 / -1; margin: 0; }
-.order-detail .payment-option { margin: 0; background: white; border-radius: 6px; padding: 1.2rem; }
+.order-detail .price-summary .total { border: 0; }
+.order-detail .price-summary .total dd { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; line-height: 1.2; }
+.order-deadline { margin-top: 1rem; padding: 1rem 1.2rem; background: #fff6de; border-left: 3px solid #865512; color: #6d460e; border-radius: 0 4px 4px 0; font-size: .875rem; line-height: 1.7; }
+.order-deadline strong, .order-deadline span { display: block; }
+.order-change-note { font-size: .85rem; line-height: 1.8; color: var(--color-muted); margin: 1rem 0 0; }
+.home-page .order-detail .flow-summary { position: static; padding: 0; border-radius: 0; background: transparent; margin-block: 2.5rem; }
+.order-detail .flow-summary > p { font-size: .95rem; max-width: 70ch; }
+.order-detail .payment-options:has(input[type=radio]) { display: grid; grid-template-columns: 1fr; gap: .75rem; margin-top: 1.3rem; }
+.order-detail .payment-options > .field-error { margin: 0; }
+.order-detail .payment-option { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 1rem; margin: 0; background: white; border-radius: 5px; padding: 1.3rem; }
+.order-detail .payment-option input { margin: 0; }
 .order-detail .payment-option:hover { border-color: var(--color-primary); }
-.order-detail .payment-option:has(input:checked) { background: white; }
+.order-detail .payment-option:has(input:checked) { background: var(--home-tint); box-shadow: inset 3px 0 var(--color-primary); }
 .order-detail .payment-option:has(input:focus-visible) { outline: 3px solid var(--color-primary); outline-offset: 3px; }
-.order-detail .payment-option b { font-family: var(--font-display); font-weight: 700; font-size: 2rem; }
-.order-detail .payment-option small { font-size: .8rem; }
-.order-detail .flow-summary .small-copy { font-size: .8rem; line-height: 1.8; }
-.order-detail .terms-check { margin-block: 1.3rem .6rem; align-items: start; }
-.order-detail .terms-check input { margin-top: .25rem; }
-.home-page .order-detail .btn.primary { min-height: 52px; gap: .4rem; }
+.order-detail .payment-option strong { font-size: 1rem; }
+.order-detail .payment-option b { font-family: var(--font-display); font-weight: 700; font-size: 2rem; margin: 0; white-space: nowrap; }
+.order-detail .payment-option small { font-size: .85rem; margin-top: .3rem; line-height: 1.65; max-width: 48ch; }
+.order-detail .flow-summary .small-copy { font-size: .875rem; line-height: 1.8; margin-top: 1rem; }
+.order-detail .terms-check { margin-block: 1.3rem .6rem; align-items: start; font-size: .95rem; }
+.order-detail .terms-check input { margin-top: .3rem; }
+.home-page .order-detail .btn.primary { min-height: 54px; gap: .4rem; font-size: 1rem; }
 .home-page .order-detail .btn.primary > span { display: inline; }
 .order-detail .btn.outline:hover { background: var(--home-tint); color: var(--color-primary); border-color: var(--color-primary); transform: none; }
-.order-detail .flow-summary .btn.outline { background: white; }
-.order-detail .flow-help { font-size: .75rem; }
-.order-detail .flow-details { font-size: .875rem; overflow-wrap: anywhere; }
+.order-detail .flow-help { font-size: .85rem; line-height: 1.7; }
+.order-detail .flow-details { font-size: .95rem; overflow-wrap: anywhere; }
 .order-detail .flow-details summary { min-height: 44px; display: list-item; align-content: center; padding-block: .5rem; }
-.order-detail .flow-details .terms { font-size: .85rem; }
+.order-detail .flow-details .terms { font-size: .9rem; }
 .home-page .order-detail .flow-secondary { border-top: 1px solid var(--color-border); padding-top: .5rem; }
 .order-detail .transaction-item > div { min-width: 0; }
 .order-detail .transaction-item .mono { overflow-wrap: anywhere; }
 .order-detail .flow-secondary .panel { margin-block: 1rem; }
 @media (max-width: 800px) { .order-heading > div { padding: 1.8rem; } }
+@media (max-width: 600px) {
+    .order-ticket { grid-template-columns: 1fr; }
+    .order-detail .price-summary { border-left: 0; border-top: 1px solid var(--color-border); padding: 1.3rem; }
+    .order-ticket-match { padding: 1.3rem; }
+}
 @media (max-width: 540px) {
     .order-heading { grid-template-columns: 1fr; }
     .order-heading figure { min-height: 130px; }
     .home-page .order-heading h1 { font-size: 2.8rem; }
     .order-heading > div { padding: 1.6rem; }
     .order-sheet { padding-top: 1.5rem; }
-    .order-detail .schedule-summary { grid-template-columns: 1fr; gap: 1rem; }
-    .order-detail .order-summary > h2 { font-size: 2.2rem; }
-    .home-page .order-detail .flow-summary { padding: 1.2rem; }
-    .order-detail .payment-options:has(input[type=radio]) { grid-template-columns: 1fr; }
+    .order-detail .payment-option { grid-template-columns: 20px minmax(0, 1fr); gap: .7rem; padding: 1.1rem; }
+    .order-detail .payment-option b { grid-column: 2; font-size: 1.9rem; }
     .order-detail .transaction-item { align-items: start; flex-direction: column; }
 }
 /* Reference-led court identity followed by one vertical booking sheet. */

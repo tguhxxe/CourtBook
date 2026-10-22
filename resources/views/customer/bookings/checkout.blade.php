@@ -23,18 +23,29 @@
     @if($pendingPayment && app(\App\Services\Payments\MidtransGateway::class)->configured())
     <div class="notice" data-payment-watch data-status-url="{{ route('payments.reconcile', $pendingPayment) }}"><p data-payment-message role="status" aria-live="polite">Memeriksa status pembayaran…</p><button type="button" class="btn outline small" data-payment-retry hidden>Periksa status lagi</button></div>
     @endif
-            <section class="panel order-summary">
-                <h2>{{ $booking->court_name }}</h2>
-                <div class="schedule-summary"><div><small class="muted">Tanggal bermain</small><strong>{{ $booking->starts_at->translatedFormat('l, d F Y') }}</strong></div><div><small class="muted">Jam bermain</small><strong>{{ $booking->starts_at->format('H:i') }}–{{ $booking->ends_at->format('H:i') }} WIB</strong></div><div><small class="muted">Durasi</small><strong>{{ $booking->duration }} jam</strong></div></div>
-                <div class="actions"><x-status :value="$booking->status"/><x-status :value="$booking->payment_status"/></div>
-                @if($booking->status === 'held')<div class="notice warning">Selesaikan pembayaran sebelum <strong>{{ min($booking->hold_expires_at,$booking->balance_due_at)->translatedFormat('d M Y, H:i:s') }} WIB</strong> agar jadwal ini tidak dilepas.</div>@endif
-                @if($booking->cancellation_reason)<div class="notice">{{ $booking->cancellation_reason }}</div>@endif
-                <dl class="price-summary"><div><dt>{{ $booking->duration }} jam × Rp{{ number_format($booking->hourly_rate,0,',','.') }}</dt><dd>Rp{{ number_format($booking->total,0,',','.') }}</dd></div><div><dt>Sudah dibayar untuk pesanan ini</dt><dd>Rp{{ number_format($booking->paid_amount,0,',','.') }}</dd></div><div class="total"><dt>{{ in_array($booking->status, ['held', 'confirmed']) ? 'Sisa tagihan' : 'Nominal belum dibayar' }}</dt><dd>Rp{{ number_format($booking->remaining(),0,',','.') }}</dd></div></dl>
-                <p class="order-change-note">Jadwal tidak dapat diubah setelah dipesan.@if($booking->status === 'held') Jika jadwal salah, batalkan pesanan ini lalu pilih jadwal baru.@endif</p>
-            </section>
+        <section class="panel order-summary">
+            <div class="order-ticket">
+                <div class="order-ticket-match">
+                    <h2>{{ $booking->court_name }}</h2>
+                    <dl class="order-time">
+                        <div><dt>Tanggal</dt><dd>{{ $booking->starts_at->translatedFormat('l, d F Y') }}</dd></div>
+                        <div><dt>Jam bermain</dt><dd>{{ $booking->starts_at->format('H:i') }}–{{ $booking->ends_at->format('H:i') }} WIB <span>/ {{ $booking->duration }} jam</span></dd></div>
+                    </dl>
+                    <div class="actions"><x-status :value="$booking->status"/><x-status :value="$booking->payment_status"/></div>
+                </div>
+                <dl class="price-summary">
+                    <div><dt>Total sewa<small>{{ $booking->duration }} jam × Rp{{ number_format($booking->hourly_rate, 0, ',', '.') }}</small></dt><dd>Rp{{ number_format($booking->total, 0, ',', '.') }}</dd></div>
+                    <div><dt>Sudah dibayar</dt><dd>Rp{{ number_format($booking->paid_amount, 0, ',', '.') }}</dd></div>
+                    <div class="total"><dt>{{ in_array($booking->status, ['held', 'confirmed']) ? 'Sisa tagihan' : 'Nominal belum dibayar' }}</dt><dd>Rp{{ number_format($booking->remaining(), 0, ',', '.') }}</dd></div>
+                </dl>
+            </div>
+            @if($booking->status === 'held')<div class="order-deadline"><strong>Bayar sebelum {{ min($booking->hold_expires_at, $booking->balance_due_at)->translatedFormat('d M Y, H:i:s') }} WIB.</strong><span>Jadwal dilepas jika pembayaran melewati batas waktu.</span></div>@endif
+            @if($booking->cancellation_reason)<div class="notice">{{ $booking->cancellation_reason }}</div>@endif
+            <p class="order-change-note">Jadwal tidak dapat diubah setelah dipesan.@if($booking->status === 'held') Jika jadwal salah, batalkan pesanan ini lalu pilih jadwal baru.@endif</p>
+        </section>
         <aside class="panel flow-summary">
             @if($canPay)
-                <h2>{{ $booking->paid_amount ? 'Pembayaran sisa tagihan' : 'Pilih jumlah pembayaran' }}</h2>
+                <h2>{{ $booking->paid_amount ? 'Pembayaran sisa tagihan' : 'Pilih cara bayar' }}</h2>
                 @if(!app(\App\Services\Payments\MidtransGateway::class)->configured())
                 <div class="notice warning">Pembayaran Sandbox belum tersedia. Pengelola perlu mengaktifkan layanan pembayaran.@if($booking->status === 'held') Booking belum dikonfirmasi.@endif</div>
                 @else
@@ -42,8 +53,8 @@
                     @csrf
                     <fieldset class="payment-options"><legend class="sr-only">Pilihan pembayaran</legend>
                         @if(!$booking->paid_amount)
-                        <label class="payment-option"><input type="radio" name="kind" value="dp" data-amount="{{ $booking->dp_amount }}" @checked(old('kind','dp') === 'dp') aria-describedby="kind-help"><span><strong>Bayar uang muka (DP {{ $booking->dp_percent }}%)</strong><b>Rp{{ number_format($booking->dp_amount,0,',','.') }}</b><small>Sisa Rp{{ number_format($booking->total - $booking->dp_amount,0,',','.') }} dibayar sebelum batas pelunasan.</small></span></label>
-                        <label class="payment-option"><input type="radio" name="kind" value="full" data-amount="{{ $booking->remaining() }}" @checked(old('kind','dp') === 'full') aria-describedby="kind-help"><span><strong>Bayar langsung lunas</strong><b>Rp{{ number_format($booking->remaining(),0,',','.') }}</b><small>Tidak ada sisa tagihan setelah pembayaran berhasil.</small></span></label>
+                        <label class="payment-option"><input type="radio" name="kind" value="dp" data-amount="{{ $booking->dp_amount }}" @checked(old('kind', 'dp') === 'dp') aria-describedby="kind-help"><span class="payment-copy"><strong>Uang muka (DP {{ $booking->dp_percent }}%)</strong><small>Sisa Rp{{ number_format($booking->total - $booking->dp_amount, 0, ',', '.') }} dilunasi sebelum batas pelunasan.</small></span><b>Rp{{ number_format($booking->dp_amount, 0, ',', '.') }}</b></label>
+                        <label class="payment-option"><input type="radio" name="kind" value="full" data-amount="{{ $booking->remaining() }}" @checked(old('kind', 'dp') === 'full') aria-describedby="kind-help"><span class="payment-copy"><strong>Bayar lunas</strong><small>Tidak ada sisa tagihan setelah pembayaran berhasil.</small></span><b>Rp{{ number_format($booking->remaining(), 0, ',', '.') }}</b></label>
                         @else
                         <input type="hidden" name="kind" value="balance"><p class="payment-amount">Rp{{ number_format($booking->remaining(),0,',','.') }}</p><p>Uang muka sudah dibayar. Selesaikan sisa tagihan untuk melunasi pesanan ini.</p>
                         @endif

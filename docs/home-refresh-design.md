@@ -254,3 +254,21 @@ The user requests the same sports presentation reference for /bookings/3. Apply 
 Reject recoloring the old left/right panels: the user still has to reconcile the schedule on one side with payment on the other. Use one vertical review-to-payment sequence instead, with a compact sports identity banner. Preserve all server-owned branches, amounts, deadlines, polling hooks, recovery and confirmation controls. Do not infer payment success from the presentation. No checkout payment submission to a real gateway is part of design verification.
 
 Order checkout verification: all 87 PHP tests (320 assertions) and the production build passed. Full browser regression on isolated SQLite passed 15 checks/8 axe scans, including customer booking, cancellation confirmation and admin CRUD. Dedicated configured-state tests used dummy keys and intercepted reconciliation responses: five widths (320/390/768/1024/1440px) had no overflow; three additional axe scans returned zero violations. Verified visible DP/full/balance payment-button amounts, keyboard radio selection, terms validation with focused summary, paid/inactive/expired/refund/pending states, refund disclosure and safe confirmation/Escape, history keyboard disclosure, long codes and reduced motion. No valid gateway payment was submitted. Payment-unavailable regression passed on a separate unconfigured server. Desktop/mobile screenshots were inspected; the navy sports header and vertical order/payment sheet replace the old side-by-side panels. Refund form disclosure opens automatically for its validation error. Strict audit: zero findings; DESIGN lint: zero errors and six existing legacy warnings. Only test SQLite contains generated fixtures; no schema, permission, payment transitions or real customer bookings were altered.
+
+### Screenshot-led payment simplification
+
+The supplied URL says /courts/3, but screenshot 2 shows the order/payment owner. Target that visible checkout region. Retain blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581; increase reading text to 15–16px. Barlow remains for court identity/amounts and Manrope for labels. Left align text and right align amounts.
+
+```text
+[one ticket: court + date/time/status | itemized bill]
+[actual payment deadline]
+[Choose payment]
+(o) DP 50% / short balance note                  amount
+( ) Full / short note                           amount
+[terms + agreement]
+[clear next payment action with amount]
+```
+
+Reject another pair of large option cards in a tinted container. The ticket groups schedule and billing together; two compact radio rows give a single comparison axis. Remove the large blue payment backdrop and repeated fine-print styling. Keep deadlines, DP forfeiture, actual amounts, terms, server validation and state branches intact. This supersedes the previous payment-card composition while retaining the shared sports header.
+
+Screenshot-led simplification verification: all 87 PHP tests (320 assertions), Vite build and Docker startup passed. Full isolated browser regression passed 15 checks/8 axe scans. Dedicated order-state checks passed at 320/390/768/1024/1440px with no page overflow and three further axe scans without violations. Verified DP/full/balance amounts and payment-button visibility, keyboard selection, required-terms validation/focus, paid/inactive/expired/refund/pending states, safe refund confirmation and history disclosure. No gateway payment was submitted. Desktop/mobile screenshots inspected: one ticket, larger reading text and two radio rows supersede the previous broad financial rows/tinted payment-card container. Static audit has zero findings; DESIGN lint has zero errors and six existing legacy warnings. Target is the checkout region shown in screenshot 2; /courts/{court} schedule was not changed in this revision.
