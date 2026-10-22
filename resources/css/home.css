@@ -1,39 +1,9 @@
-@font-face {
-    font-family: 'Manrope';
-    src: url('../fonts/Manrope-Variable.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 200 800;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Barlow Condensed';
-    src: url('../fonts/BarlowCondensed-Bold.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-}
-/* This home theme is the first migration surface; other routes retain their theme. */
+/* Shared blue theme route variants; canonical tokens and fonts live in app.css. */
 .home-theme {
     --home-nav-height: 98px;
     scroll-padding-top: calc(var(--home-nav-height) + 1rem);
-    --scroll-thumb: #8fa7ca;
-    --scroll-track: #edf4ff;
-    --scroll-hover: #526581;
-    --scroll-active: #1455d9;
 }
 .home-page {
-    --color-primary: #1455d9;
-    --color-accent: #d6f05a;
-    --color-background: #ffffff;
-    --color-surface: #ffffff;
-    --color-text: #102c59;
-    --color-muted: #526581;
-    --color-border: #dce5f0;
-    --home-tint: #edf4ff;
-    --home-primary-hover: #1044af;
-    --font-body: 'Manrope', Arial, sans-serif;
-    --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-    --page-max: 76rem;
     font-size: 15px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -498,13 +468,6 @@
 .catalog-empty { grid-column: 1 / -1; padding-block: 3rem; }
 .home-page .catalog-empty h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; }
 .catalog-empty p { color: var(--color-muted); max-width: 58ch; font-size: .9rem; margin-bottom: 1.3rem; }
-.catalog-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2rem; font-size: .8rem; }
-.catalog-pagination p { margin: 0; color: var(--color-muted); }
-.catalog-pagination > div { display: flex; gap: .6rem; align-items: center; }
-.catalog-pagination a, .catalog-pagination span { display: inline-flex; min-height: 44px; align-items: center; padding: .55rem .8rem; border-radius: 5px; }
-.catalog-pagination a { border: 1px solid var(--color-border); font-weight: 700; color: var(--color-primary); }
-.catalog-pagination a:hover { background: var(--home-tint); border-color: var(--color-primary); }
-.catalog-pagination [aria-disabled] { color: var(--color-muted); }
 .catalog-demo { color: var(--color-muted); font-size: .75rem; margin: 2.5rem 0 0; }
 @media (max-width: 800px) {
     .catalog-filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem 1.2rem; }
@@ -517,9 +480,6 @@
     .catalog-results { padding-block: 1.5rem 2.5rem; }
     .catalog-filters { grid-template-columns: minmax(0, 1fr); gap: .3rem; }
     .catalog-result-heading { align-items: start; flex-direction: column; gap: .4rem; margin-top: 1.5rem; }
-    .catalog-pagination { flex-direction: column; align-items: start; }
-    .catalog-pagination > div { gap: .2rem; flex-wrap: wrap; }
-    .catalog-pagination a, .catalog-pagination span { padding-inline: .65rem; }
 }
 @media (max-width: 1100px) {
     .home-navbar { gap: 1.5rem; }

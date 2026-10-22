@@ -1,4 +1,15 @@
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="csrf-token" content="{{ csrf_token() }}"><title>@yield('title','CourtBook') | CourtBook</title>@vite(['resources/css/app.css','resources/js/app.js'])</head>
-<body><a class="skip" href="#main">Lewati ke konten</a><header class="site-header"><div class="container nav"><a class="brand" href="{{ route('home') }}"><x-logo/>CourtBook<span class="brand-dot">.</span></a><nav aria-label="Navigasi utama"><a href="{{ route('courts.index') }}" @class(['current'=>request()->routeIs('courts.*')])>Cari lapangan</a>@include('components.customer-account-links')</nav></div></header>
-<main id="main" class="container main">@include('components.feedback')@yield('content')</main><footer class="footer"><div class="container footer-grid"><div><a class="brand" href="{{ route('home') }}">CourtBook.</a><p>Lebih banyak bermain. Lebih sedikit menunggu.</p></div><div><strong>CourtBook Sport Center</strong><p>Malang, Jawa Timur<br>Jl. Olahraga Contoh No. 10 <span class="muted">(alamat simulasi)</span></p></div><div><strong>Proyek praktikum PKPL/SQA</strong><p>Seluruh tempat, fasilitas, dan akun demo adalah simulasi.<br>Tema masih membutuhkan persetujuan asisten.</p></div></div></footer>@include('components.confirm-dialog')</body></html>
+<html lang="id" class="home-theme">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}"><title>@yield('title', 'CourtBook') | CourtBook</title>
+    <x-theme-assets home/>
+</head>
+<body class="home-page">
+    <a class="skip" href="#main">Lewati ke konten</a>
+    <x-home.navbar/>
+    <main id="main" class="home-wrap account-workspace" tabindex="-1">@include('components.feedback')@yield('content')</main>
+    <x-home.footer/>
+    @include('components.confirm-dialog')
+</body>
+</html>

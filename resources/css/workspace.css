@@ -1,0 +1,102 @@
+.catalog-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2rem; font-size: .8rem; }
+.catalog-pagination p { margin: 0; color: var(--color-muted); }
+.catalog-pagination > div { display: flex; gap: .6rem; align-items: center; }
+.catalog-pagination a, .catalog-pagination span { display: inline-flex; min-height: 44px; align-items: center; padding: .55rem .8rem; border-radius: 5px; }
+.catalog-pagination a { border: 1px solid var(--color-border); font-weight: 700; color: var(--color-primary); }
+.catalog-pagination a:hover { background: var(--home-tint); border-color: var(--color-primary); }
+.catalog-pagination [aria-disabled] { color: var(--color-muted); }
+/* Operational and account variants of the shared CourtBook blue theme. */
+.account-workspace { padding-block: 2.5rem 3.5rem; min-height: 62vh; }
+.home-page .account-workspace .page-heading h1 { font-size: clamp(2.7rem, 4vw, 3.7rem); font-weight: 700; line-height: 1.08; }
+.home-page .account-workspace h2 { font-size: 1.9rem; font-weight: 700; line-height: 1.15; }
+.home-page .account-workspace .panel h3 { font-size: 1.1rem; }
+.account-workspace .page-heading { margin-bottom: 2rem; }
+.account-workspace .page-heading .muted { max-width: 65ch; font-size: .95rem; }
+.account-workspace .panel { border-radius: 8px; padding: 1.6rem; }
+.account-workspace .field label, .admin-body .field label { font-size: .9rem; font-weight: 700; }
+.account-workspace .field input, .account-workspace .field select, .admin-body .field input, .admin-body .field select { min-height: 48px; border-radius: 6px; font-size: .95rem; }
+.account-workspace .field small, .admin-body .field small { font-size: .8rem; line-height: 1.7; }
+.account-workspace .password-toggle, .admin-body .password-toggle { top: .4rem; font-size: .75rem; }
+.account-workspace .btn, .admin-body .btn { border-radius: 6px; min-height: 46px; }
+.account-workspace .btn.outline:hover { background: var(--home-tint); color: var(--color-primary); transform: none; }
+.account-workspace .text-link { color: var(--color-primary); }
+.account-workspace .notice { font-size: .9rem; line-height: 1.8; }
+.account-workspace .transaction-item { overflow-wrap: anywhere; }
+.account-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; align-items: start; }
+.account-form-grid .panel > p { font-size: .875rem; }
+.account-refund-guide { padding-block: .5rem 1.5rem; max-width: 75ch; font-size: .9rem; }
+.account-refund-guide summary { min-height: 44px; cursor: pointer; font-weight: 700; padding-block: .5rem; }
+.account-refund-guide summary:hover { color: var(--color-primary); }
+.account-refund-guide p { margin-top: .7rem; }
+.home-page .account-error { max-width: 48rem; margin: 2rem auto; padding-block: 3rem; }
+.home-page .account-error h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; }
+.account-auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 4rem; }
+.account-auth-story { position: relative; isolation: isolate; background: var(--color-text); color: white; border-radius: 8px; min-height: 600px; display: flex; align-items: end; padding: 2rem 2rem 4rem; overflow: hidden; }
+.account-auth-story img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.account-auth-story::after { content: ''; position: absolute; inset: 20% 0 0; background: linear-gradient(0deg, #071e43fa, #071e4300); z-index: -1; }
+.account-auth-story > div > p { font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 4vw, 4.2rem); line-height: 1.05; margin-bottom: 1rem; }
+.account-auth-story span { font-size: .9rem; color: #e1eaff; }
+.account-auth-story > small { position: absolute; bottom: 1.2rem; left: 2rem; right: 2rem; font-size: .7rem; color: #e1eaff; }
+.account-auth-form { max-width: 440px; width: 100%; padding-block: 1rem; }
+.home-page .account-auth h1 { font-size: clamp(2.6rem, 4vw, 3.4rem); font-weight: 700; line-height: 1.08; }
+.account-auth-form > p { font-size: .9rem; line-height: 1.8; }
+.account-auth-form > form { margin-top: 1.5rem; }
+.admin-body .admin-shell { grid-template-columns: 235px minmax(0, 1fr); }
+.admin-body .admin-sidebar { background: var(--color-text); position: sticky; top: 0; align-self: start; min-height: 100dvh; padding: 2rem 1.3rem; gap: .7rem; }
+.admin-body .brand { font-family: var(--font-body); font-size: 1.5rem; font-weight: 800; letter-spacing: -.06em; }
+.admin-body .brand svg { width: 32px; height: 32px; flex: none; }
+.admin-body .admin-sidebar-label { font-size: .75rem; color: #d2def1; margin: .5rem 0 0; }
+.admin-body .admin-sidebar nav { display: grid; margin-block: 1rem 1.5rem; gap: .35rem; }
+.admin-body .admin-sidebar nav a { min-height: 44px; display: flex; align-items: center; font-size: .875rem; border-radius: 6px; }
+.admin-body .admin-sidebar nav a.current, .admin-body .admin-sidebar nav a:hover { background: #234a80; color: white; text-decoration: none; }
+.admin-sidebar-actions { display: grid; gap: .4rem; }
+.admin-sidebar-actions form { margin: 0; }
+.admin-sidebar-actions .btn { width: 100%; }
+.admin-body .sidebar-note { color: #d2def1; font-size: .7rem; line-height: 1.8; padding-top: 1rem; }
+.admin-content { min-width: 0; }
+.admin-body .admin-header { padding: 1.2rem 2rem; gap: 1rem; font-size: .85rem; background: #f7faff; }
+.admin-header > span { overflow-wrap: anywhere; }
+.admin-body .admin-main { width: 100%; max-width: 1440px; padding: 2rem; }
+.admin-body .page-heading { margin-bottom: 1.8rem; }
+.admin-body .page-heading h1 { font-size: clamp(2.5rem, 3.5vw, 3.5rem); font-weight: 700; line-height: 1.08; overflow-wrap: anywhere; }
+.admin-body .page-heading p { font-size: .9rem; max-width: 72ch; }
+.admin-body h2 { font-size: 1.9rem; font-weight: 700; }
+.admin-body .panel { border-radius: 8px; }
+.admin-body .form-panel { max-width: 760px; padding: 1.7rem; }
+.admin-body table { font-size: .875rem; }
+.admin-body th { font-size: .8rem; text-transform: none; letter-spacing: 0; color: var(--color-text); }
+.admin-body td { line-height: 1.7; }
+.admin-body .table-wrap { max-width: 100%; }
+.admin-body .stat { border-top: 3px solid var(--color-primary); }
+.admin-body .stat strong { font-size: 3rem; font-weight: 700; }
+.admin-body .stat small { font-size: .85rem; }
+.admin-body .notice { font-size: .875rem; line-height: 1.8; }
+@media (max-height: 760px) { .admin-body .admin-sidebar { position: static; min-height: 0; } }
+@media (max-width: 1000px) {
+    .admin-body .admin-shell { grid-template-columns: minmax(0, 1fr); }
+    .admin-body .admin-sidebar { position: static; min-height: 0; padding: 1.5rem; }
+    .admin-body .admin-sidebar nav { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-block: .5rem; }
+    .admin-sidebar-actions { grid-template-columns: 1fr 1fr; max-width: 420px; }
+    .admin-body .sidebar-note { margin: 0; padding: 0; }
+}
+@media (max-width: 800px) {
+    .account-auth { grid-template-columns: 1fr; gap: 0; }
+    .account-auth-story { display: none; }
+    .account-auth-form { margin-inline: auto; }
+    .account-form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+    .account-workspace { padding-block: 1.8rem 2.5rem; }
+    .account-workspace .row-heading { flex-direction: column; align-items: start; gap: 1rem; }
+    .account-workspace .panel { padding: 1.2rem; }
+    .account-workspace .section-heading { align-items: start; flex-wrap: wrap; }
+    .account-workspace .transaction-item { flex-direction: column; }
+    .admin-body .admin-sidebar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .admin-body .admin-header { padding: 1rem 1.2rem; }
+    .admin-body .admin-main { padding: 1.5rem 1.2rem; }
+    .admin-body .row-heading, .admin-body .section-heading { align-items: start; flex-wrap: wrap; }
+    .admin-body .form-panel { padding: 1.2rem; }
+    .catalog-pagination { flex-direction: column; align-items: start; }
+    .catalog-pagination > div { gap: .2rem; flex-wrap: wrap; }
+    .catalog-pagination a, .catalog-pagination span { padding-inline: .65rem; }
+}

@@ -3,20 +3,20 @@ version: alpha
 name: CourtBook
 description: Papan jadwal klub olahraga Malang dengan ilustrasi garis lapangan dan checkout yang tenang.
 colors:
-  primary: '#163e32'
-  accent: '#d9ef83'
-  background: '#f5f7f5'
+  primary: '#1455d9'
+  accent: '#d6f05a'
+  background: '#ffffff'
   surface: '#ffffff'
-  text: '#1c3029'
-  muted: '#53665d'
-  border: '#dce4de'
+  text: '#102c59'
+  muted: '#526581'
+  border: '#dce5f0'
   danger: '#a93030'
   warning: '#865512'
 typography:
   body:
-    fontFamily: 'Segoe UI, Arial, sans-serif'
+    fontFamily: 'Manrope, Arial, sans-serif'
   display:
-    fontFamily: 'Bahnschrift, Trebuchet MS, sans-serif'
+    fontFamily: 'Barlow Condensed, Arial Narrow, sans-serif'
   mono:
     fontFamily: 'Consolas, monospace'
 rounded:
@@ -24,7 +24,7 @@ rounded:
   panel: '1rem'
 spacing:
   section: '4rem'
-  page-max: '74rem'
+  page-max: '76rem'
 components:
   button: {}
   field: {}
@@ -39,13 +39,13 @@ CourtBook melayani pelanggan kompleks olahraga di Malang yang ingin memilih jadw
 North Star: papan jadwal klub tenis, garis putih lapangan, angka jam terbaca, dan tombol tindakan tegas. Signature: ilustrasi lapangan SVG orisinal sedikit miring pada hero; seluruh formulir tetap tenang dan lurus. Alternatif kartu metrik pada hero ditolak karena tidak membantu memilih lapangan. Hindari foto venue yang tidak benar, gradien neon, dan dashboard dekoratif.
 
 ## Colors
-Hijau primary untuk brand dan tindakan aman; lime accent hanya bola/aksen olahraga. Surface putih pada background abu hijau. Danger untuk pembatalan dan penghapusan; warning untuk batas waktu dan pembayaran belum tersedia. Semua status memiliki label teks. Mode terang saja; forced colors mengikuti sistem.
+Biru primary untuk brand dan tindakan utama; navy untuk teks dan navigasi operasional. Lime accent hanya bola/aksen olahraga. Surface putih dengan tint biru pucat. Danger untuk pembatalan dan penghapusan; warning untuk batas waktu dan pembayaran belum tersedia. Semua status memiliki label teks. Mode terang saja; forced colors mengikuti sistem.
 
 ## Typography
-Display Bahnschrift memberi karakter papan olahraga; fallback Trebuchet MS. Body Segoe UI dengan fallback Arial untuk formulir. Consolas untuk kode booking dan jam. Tidak mengunduh font eksternal sehingga tidak ada font swap. Judul 2-4.1rem responsif; body 15px, line-height 1.65; field dan tabel 0.83-0.88rem. Judul marketing lebih besar daripada admin.
+Display Barlow Condensed memberi karakter papan olahraga; fallback Arial Narrow. Body Manrope dengan fallback Arial untuk formulir. Font TrueType dihosting lokal melalui fonts.css dan dipreload oleh komponen theme-assets. Consolas untuk kode booking dan jam. Judul responsif; body 15px, line-height 1.65; field dan tabel 0.875-0.95rem. Judul marketing lebih besar daripada admin.
 
 ## Layout
-Lebar 74rem. Hero dua kolom, katalog tiga kartu, detail dua kolom. Breakpoint 1000px dan 720px; semua menjadi satu kolom pada mobile. Admin sidebar berubah menjadi navigasi terbungkus di atas. Dokumen memiliki scroll vertikal; tabel memiliki scroll horizontal sendiri. Ilustrasi mencadangkan aspect ratio; tombol mempertahankan dimensi saat busy. Section gap 4rem desktop dan 2.5rem mobile.
+Lebar 76rem. Hero dua kolom, katalog tiga kartu, detail dua kolom. Admin sidebar berubah menjadi navigasi di atas pada 1000px; formulir akun menjadi satu kolom pada 800px. Dokumen memiliki scroll vertikal; tabel memiliki scroll horizontal sendiri. Ilustrasi mencadangkan aspect ratio; tombol mempertahankan dimensi saat busy. Section gap 4rem desktop dan 2.5rem mobile.
 
 ## Elevation & Depth
 Gunakan border dan warna permukaan, tanpa shadow pada kartu statis. Backdrop dialog memisahkan keputusan berisiko. Panel checkout sticky desktop dan static mobile.
@@ -120,3 +120,7 @@ customer/pay.blade.php uses the shared blue shell and payment-launch variant: na
 ## Midtrans-owned checkout theme
 
 The Snap interface uses Midtrans merchant preferences, managed through courtbook:payment-theme. Sandbox target: CourtBook display name, Indonesian locale, Nunito, navy #102c59 header, blue #1455d9 action, 6px input/button radii and a visible brand header. Nunito is an intentional provider-supported font adapter; website Manrope/Barlow remain unchanged. Host CSS cannot style the cross-origin provider contents. The command previews by default, backs up visual preferences before apply, preserves existing extra brand fields, and verifies saved visual values plus unchanged nonvisual preferences. It never creates a payment or sends payment-channel/fee/redirect settings. See docs/midtrans-sandbox.md for scope and rollback information.
+
+## Complete blue application migration
+
+By explicit user request, the accepted blue pilot is now the application baseline, including remaining account/admin/error screens. Earlier pilot/legacy-theme notes above are historical and superseded. Canonical values live in app.css :root and match the updated frontmatter; home.css now inherits them instead of duplicating palette/font values. Shared font faces live in fonts.css, imported by app.css. workspace.css owns account/admin density and layout variants. The existing home design stays intact. Admin uses a navy operational sidebar and white form/table surfaces; account pages compose the same navbar/footer as home. Success, warning and danger retain their semantic colors. No domain or permission rule changes.

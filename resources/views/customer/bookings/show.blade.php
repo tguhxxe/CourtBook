@@ -1,4 +1,4 @@
-@extends('layouts.customer')
+@extends(auth()->user()->role === 'admin' ? 'layouts.admin' : 'layouts.customer')
 @section('title','Detail '.$booking->code)
 @section('content')
 @if($booking->status === 'confirmed' && $booking->paid_amount)
