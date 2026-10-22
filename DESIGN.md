@@ -116,3 +116,7 @@ The latest explicit checkout request supersedes the vertical desktop layout: ord
 ## Blue payment launch
 
 customer/pay.blade.php uses the shared blue shell and payment-launch variant: navy match receipt (snapshot court/date, payment kind and attempt amount) on the left; gateway action/deadline/live status on the right. It stacks below 901px. The existing SDK, token, reconciliation/retry and server-authoritative redirect remain canonical. The status region owns data-payment-watch independently of the launch button. This view is rendered after a valid POST payment start; no GET mutation route is added.
+
+## Midtrans-owned checkout theme
+
+The Snap interface uses Midtrans merchant preferences, managed through courtbook:payment-theme. Sandbox target: CourtBook display name, Indonesian locale, Nunito, navy #102c59 header, blue #1455d9 action, 6px input/button radii and a visible brand header. Nunito is an intentional provider-supported font adapter; website Manrope/Barlow remain unchanged. Host CSS cannot style the cross-origin provider contents. The command previews by default, backs up visual preferences before apply, preserves existing extra brand fields, and verifies saved visual values plus unchanged nonvisual preferences. It never creates a payment or sends payment-channel/fee/redirect settings. See docs/midtrans-sandbox.md for scope and rollback information.

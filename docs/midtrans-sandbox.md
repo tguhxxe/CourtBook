@@ -35,3 +35,16 @@ Halaman pembayaran dan detail booking dengan attempt belum final memanggil endpo
 
 ## Verifikasi lokal 9 Oktober 2026
 Build aset lama tidak memuat polling terbaru; aset dibangun ulang. Transaksi Sandbox terbaru berhasil diverifikasi melalui GET Status dan booking menjadi confirmed/lunas. Pemeriksaan pending kini tetap berjalan setelah satu menit. Webhook publik belum diverifikasi; hasil ini memakai verifikasi langsung server ke Midtrans.
+
+## Tema Snap CourtBook
+
+Preferensi tampilan Snap dimiliki Midtrans, termasuk saat dibuka melalui popup. CSS website tidak mengubah isi iframe tersebut. API resmi: https://docs.midtrans.com/reference/snap-checkout-preference-api dan https://docs.midtrans.com/docs/snap-preference-snap-checkout-settings.
+
+`courtbook:payment-theme` membaca preferensi dari endpoint Sandbox tetap. Tanpa opsi, hanya menampilkan rencana. `--apply` mencadangkan pengaturan tampilan ke storage/app/private/midtrans-theme, lalu menyimpan nama CourtBook, locale id, font Nunito (pilihan resmi Snap yang mendekati Manrope), header #102c59, tombol #1455d9 dan radius 6 px. Setelah PATCH, command membaca ulang preferensi dan membandingkan pengaturan di luar tampilan. Tidak ada transaksi dibuat; kanal, biaya, expiry dan redirect tidak dikirim dalam payload perubahan. Preferensi ini berlaku pada merchant Sandbox, bukan satu booking tertentu. Server Key hanya dipakai backend dan tidak dicetak.
+
+```sh
+docker compose exec app php artisan courtbook:payment-theme
+docker compose exec app php artisan courtbook:payment-theme --apply
+```
+
+Saat dijalankan langsung tanpa Docker, gunakan `php artisan courtbook:payment-theme`. Backup menyimpan nilai `before`/`after` untuk nama, locale dan brand; nilai sebelumnya dapat dipulihkan melalui Snap Preference di dashboard dengan merujuk backup. Endpoint production tidak digunakan. Logo dan susunan komponen Snap tetap mengikuti fitur yang disediakan Midtrans; font Barlow/Manrope pada website tidak diunggah ke Snap.

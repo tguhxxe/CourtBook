@@ -301,3 +301,17 @@ Refresh the POST-rendered customer.pay owner (/bookings/{booking}/payments). Pal
 Reject another photo hero on this final step: actual amount and a single payment action are the useful sports-ticket signature here. No decorative success indicator, fake trust badge or pre-verification confirmation. SDK callback, server reconciliation, expiry and redirects remain canonical. Verify the real POST flow with Laravel HTTP fakes and a browser SDK stub, never a real payment.
 
 Payment-launch verification: 87 PHP tests (320 assertions), Vite build and Docker build/startup passed. Full browser regression passed 15 checks/8 axe scans. Dedicated launch tests exercised the actual payment-start POST with Laravel HTTP fakes and blocked stray outbound requests, plus a stubbed Snap SDK: DP/full/balance amounts, keyboard launch, disabled state, close callback, missing SDK message, 419 session recovery, 429 retry and server-response redirect all passed. Five widths (320/390/768/1024/1440px) had no overflow; desktop/mobile axe scans returned zero violations. Both screenshots inspected. No real gateway call/payment was performed; all generated attempts are in temporary SQLite. Static audit returned zero findings; DESIGN lint returned zero errors and six existing legacy warnings. This remains a POST-rendered screen opened via Lanjut bayar; no GET payment-start route was introduced.
+
+### Midtrans Snap theme integration
+
+The payment-launch page is already blue; this request extends the appearance into the provider-owned Snap checkout. Official Preference API supports brand/header/button/font/radius and locale settings. Use CourtBook as display name, navy #102c59 header, blue #1455d9 buttons, white #ffffff and ice #edf4ff in the host UI, plus 6px controls. Snap supports a fixed font list; Nunito is the rounded sans-serif bridge to the host's Manrope. Barlow remains host-only.
+
+```text
+[CourtBook navy Snap header]
+[provider-owned payment methods]
+[blue payment action / rounded inputs]
+```
+
+Do not replace or inject CSS into the cross-origin payment UI. Apply only supported visual preferences through the Sandbox API, back up previous visual preferences and read back the saved values. Payment channels, fees, expiry, redirects and verification remain untouched. Provide an explicit dry-run/apply CLI so the account-level change is reviewable and reproducible; no transaction is created to configure the theme.
+
+Snap theme verification: local and Docker Sandbox key fingerprints matched. The real Sandbox Preference API accepted the visual-only PATCH; subsequent GET verified CourtBook/id/Nunito, #102c59/#1455d9, 6px radii and visible header. Nonvisual preference values compared equal before/after. Previous visual preferences are saved under ignored storage/app/private/midtrans-theme. No payment was created. No unexpired attempt was available for a live Snap screenshot, so provider UI rendering was not visually rechecked. Automated coverage: dry-run GET-only behavior, visual-only PATCH whitelist, backup without credentials, missing-key no-request behavior and idempotent no-PATCH behavior. All 91 PHP tests (337 assertions) passed; changed PHP files passed Pint. Strict audit: zero findings; DESIGN lint: zero errors with six existing legacy warnings. Website markup/CSS and transaction verification were not modified.
