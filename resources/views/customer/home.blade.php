@@ -42,16 +42,7 @@
     <p class="home-photo-note">Gambar merupakan ilustrasi, bukan foto lokasi sebenarnya.</p>
 </section>
 
-<section class="home-how" id="cara-booking" aria-labelledby="home-how-title">
-    <div class="home-wrap home-how-grid">
-        <div class="home-how-intro"><span class="home-court-mark" aria-hidden="true"><x-logo/></span><h2 id="home-how-title">Dari pilih jadwal<br>sampai siap main.</h2><p>Pertama kali booking? Mulai dari tiga langkah sederhana ini.</p><a class="home-button home-button-blue" href="{{ route('courts.index') }}">Cari lapangan <x-home-icon name="arrow"/></a></div>
-        <ol class="home-booking-steps">
-            <li><span class="home-step-number" aria-hidden="true">1</span><div><h3>Pilih lapangan dan jadwal</h3><p>Buka lapangan pilihanmu, cek jam yang tersedia, lalu tentukan tanggal dan durasi bermain.</p></div></li>
-            <li><span class="home-step-number" aria-hidden="true">2</span><div><h3>Periksa pesanan, lalu bayar</h3><p>Masuk atau buat akun untuk memesan. Bayar DP {{ $settings->dp_percent }}% atau lunas dalam {{ config('courtbook.hold_minutes') }} menit. Tunggu pembayaran terverifikasi.</p></div></li>
-            <li><span class="home-step-number" aria-hidden="true">3</span><div><h3>Siapkan tim. Waktunya main!</h3><p>Pastikan booking terkonfirmasi. Jika memilih DP, lunasi sisanya paling lambat {{ config('courtbook.lead_hours') }} jam sebelum jadwal.</p></div></li>
-        </ol>
-    </div>
-</section>
+<x-home.booking-guide :settings="$settings"/>
 
 <section class="home-wrap home-section home-faq" aria-labelledby="home-faq-title">
     <div class="home-faq-intro"><h2 id="home-faq-title">Sebelum mulai main.</h2><p>Beberapa hal yang perlu kamu tahu sebelum memesan lapangan.</p></div>

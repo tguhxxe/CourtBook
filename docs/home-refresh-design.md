@@ -104,3 +104,19 @@ This refresh introduces no database migrations or payment/business-rule changes.
 Navbar/footer extraction verification: all 87 application tests passed. The rendered navbar/footer DOM and screenshot hashes before/after extraction matched at 1440px and 390px; the mobile menu opened successfully. The strict premium audit reported zero findings, and Docker rebuilt and started successfully. This is a structure-only refactor; existing CSS and booking behavior are retained.
 
 Featured court refresh verification: 87 application tests passed. Vite and Docker builds succeeded. Read-only Chrome checks at 320/390/768/1024/1440px found no page overflow or clipped card panels; all images loaded, schedule navigation reached the existing court route, long names wrapped, and reduced-motion disabled image transitions. Desktop/mobile axe scans reported zero violations. The strict premium audit reported zero findings, and DESIGN.md lint returned zero errors with the six existing legacy token-reference warnings. Desktop and actual mobile viewport screenshots were inspected; prices and actions remain readable.
+
+### Booking guide refresh
+
+Retain blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581 and the existing Manrope/Barlow pair. Use a navy sports playbook: left-aligned headline and introduction above three open numbered lanes, with court-line geometry joining the real sequence. White body text and a white catalogue action provide contrast. No moving decoration or simulated booking status.
+
+```text
+Chosen: [Heading                    Intro + catalogue action]
+        [1 ——————— court service line —————— 2 —————— 3]
+        [Choose schedule] [Review and payment] [Confirm and play]
+Mobile: heading, intro/action, then 1 → 2 → 3 vertically.
+Alternative: three floating icon cards — rejected; repeats a generic card kit.
+```
+
+Critique: the old timeline is clear but visually anonymous. The new signature is one continuous court-like panel, not three boxes. Numbering conveys the actual order. Limit decorative court marks to the sequence rail; preserve payment verification and dynamic deadlines. Component owner: `components/home/booking-guide.blade.php`; styling remains in home.css.
+
+Booking guide verification: all 87 application tests (320 assertions) and the production Vite build passed. Docker rebuilt successfully; app and scheduler are healthy. Read-only Chrome checks at 320/390/768/1024/1440px found no page overflow or clipped steps. Desktop/mobile axe scans returned zero violations; keyboard Enter on the catalogue action reached /courts, reduced motion retained all steps, and no page errors occurred. Desktop and mobile screenshots were inspected. Strict static audit: zero findings; DESIGN.md lint: zero errors and six existing legacy token warnings. This change introduces no booking logic or payment state changes.

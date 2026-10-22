@@ -134,19 +134,21 @@
 .home-photo-note { color: var(--color-muted); font-size: .7rem; margin: 1.2rem 0 0; }
 .home-empty { grid-column: 1 / -1; border: 1px dashed var(--color-border); padding: 2.5rem; border-radius: 8px; }
 .home-empty p { color: var(--color-muted); }
-.home-how { background: var(--home-tint); padding-block: 5rem; scroll-margin-top: 2rem; }
-.home-how-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 7rem; align-items: center; }
-.home-court-mark { display: block; margin-bottom: 1rem; color: var(--color-primary); }
-.home-court-mark svg { width: 42px; height: 42px; }
-.home-how-intro h2 { margin-bottom: 1rem; }
-.home-how-intro p { color: var(--color-muted); max-width: 33ch; font-size: .9rem; margin-bottom: 1.5rem; }
-.home-booking-steps { padding: 0; margin: 0; list-style: none; }
-.home-booking-steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 1.3rem; position: relative; padding-bottom: 2rem; }
-.home-booking-steps li:not(:last-child)::after { content: ''; position: absolute; top: 46px; bottom: 6px; left: 19px; width: 1px; background: #b6cbeb; }
-.home-booking-steps li:last-child { padding-bottom: 0; }
-.home-step-number { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c6d7f1; border-radius: 50%; color: var(--color-primary); background: white; font-weight: 800; font-size: .85rem; }
-.home-page .home-booking-steps h3 { font-size: .98rem; line-height: 1.5; margin: .35rem 0 .4rem; }
-.home-booking-steps p { font-size: .875rem; line-height: 1.85; color: var(--color-muted); max-width: 55ch; margin: 0; }
+/* One continuous court-like rail connects the three real booking stages. */
+.home-how { background: var(--color-text); color: white; padding-block: 4.5rem; scroll-margin-top: 2rem; }
+.home-how-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; margin-bottom: 3rem; }
+.home-page .home-how h2 { color: white; font-size: clamp(3rem, 4.5vw, 4.4rem); margin: 0; }
+.home-how-intro p { color: #d2def1; max-width: 45ch; font-size: .9rem; margin: 0 0 1.3rem; }
+.home-booking-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0; margin: 0; list-style: none; border: 1px solid #6a83a6; }
+.home-booking-steps li { min-width: 0; padding: 1.6rem 1.8rem 1.9rem; position: relative; display: flex; flex-direction: column; }
+.home-booking-steps li + li { border-left: 1px solid #6a83a6; }
+.home-step-rail { display: flex; justify-content: space-between; align-items: center; margin: 0 0 1.4rem; position: relative; }
+.home-step-rail::after { content: ''; position: absolute; height: 1px; background: #6a83a6; left: 58px; right: 42px; top: 50%; }
+.home-step-rail > svg { width: 27px; height: 27px; color: #d2def1; }
+.home-step-number { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: white; color: var(--color-text); font-family: var(--font-display); font-size: 1.7rem; line-height: 1; }
+.home-page .home-booking-steps h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 2.5vw, 2.3rem); font-weight: 700; color: white; line-height: 1.12; letter-spacing: 0; margin: 0 0 1rem; }
+.home-booking-steps p { font-size: .875rem; line-height: 1.85; color: #d2def1; margin: 0 0 1.5rem; max-width: 40ch; }
+.home-step-detail { display: block; color: white; margin-top: auto; padding-top: .9rem; border-top: 1px solid #6a83a6; font-size: .75rem; font-weight: 700; line-height: 1.65; }
 .home-faq { display: grid; grid-template-columns: .85fr 1.15fr; gap: 5rem; }
 .home-faq-intro h2 { margin-bottom: .8rem; }
 .home-faq-intro p { color: var(--color-muted); max-width: 33ch; font-size: .85rem; }
@@ -188,7 +190,7 @@
     .home-court-content { padding: 1.1rem; }
     .home-court-booking { grid-template-columns: 1fr; gap: 1rem; }
     .home-court-visual { min-height: 290px; }
-    .home-how-grid { gap: 4rem; }
+    .home-how-heading { gap: 3rem; }
     .home-faq { gap: 3rem; }
 }
 @media (max-width: 800px) {
@@ -222,7 +224,8 @@
     .home-section-heading p { max-width: 34ch; }
     .home-court-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .home-how { padding-block: 3.7rem; }
-    .home-how-grid { grid-template-columns: 1fr 1.2fr; gap: 2rem; }
+    .home-how-heading { gap: 2rem; }
+    .home-booking-steps li { padding: 1.3rem 1.1rem; }
     .home-how-intro .home-button { gap: 1rem; }
     .home-faq { grid-template-columns: 1fr; gap: 1.5rem; }
     .home-faq-intro p { max-width: 50ch; }
@@ -266,11 +269,15 @@
     .home-schedule-link { font-size: .8rem; }
     .home-photo-note { font-size: .65rem; }
     .home-how { padding-block: 3rem; }
-    .home-how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .home-how-intro p { max-width: 35ch; font-size: .84rem; }
-    .home-booking-steps li { gap: 1rem; padding-bottom: 1.7rem; }
-    .home-booking-steps p { font-size: .875rem; }
-    .home-page .home-booking-steps h3 { font-size: .9rem; }
+    .home-how-heading { grid-template-columns: 1fr; gap: 1.3rem; margin-bottom: 2rem; }
+    .home-page .home-how h2 { font-size: 3rem; }
+    .home-how-intro p { max-width: 38ch; font-size: .875rem; }
+    .home-booking-steps { grid-template-columns: 1fr; }
+    .home-booking-steps li { padding: 1.5rem; }
+    .home-booking-steps li + li { border-left: 0; border-top: 1px solid #6a83a6; }
+    .home-step-rail { margin-bottom: 1.1rem; }
+    .home-page .home-booking-steps h3 { font-size: 2rem; }
+    .home-booking-steps p { margin-bottom: 1.2rem; }
     .home-faq { gap: 1rem; padding-bottom: 2rem; }
     .home-faq-list summary { font-size: .875rem; padding-block: 1.2rem; }
     .home-faq-answer { padding-right: .4rem; font-size: .875rem; }
