@@ -23,6 +23,7 @@
     @if($pendingPayment && app(\App\Services\Payments\MidtransGateway::class)->configured())
     <div class="notice" data-payment-watch data-status-url="{{ route('payments.reconcile', $pendingPayment) }}"><p data-payment-message role="status" aria-live="polite">Memeriksa status pembayaran…</p><button type="button" class="btn outline small" data-payment-retry hidden>Periksa status lagi</button></div>
     @endif
+        <div class="order-checkout-columns">
         <section class="panel order-summary">
             <div class="order-ticket">
                 <div class="order-ticket-match">
@@ -73,7 +74,9 @@
             @else
                 <h2>Pesanan tidak aktif</h2><p>Jadwal pada pesanan ini sudah dilepas. Pilih jadwal baru jika Anda ingin bermain.</p><a class="btn primary wide" href="{{ route('courts.index') }}">Pilih jadwal baru</a>
             @endif
-        </aside>            @if($booking->refunds->count())
+        </aside>
+        </div>
+        @if($booking->refunds->count())
             <section class="panel"><h2>Penanganan refund</h2><a class="text-link" href="{{ route('refunds.index') }}">Lihat refund saya &rarr;</a>@foreach($booking->refunds as $refund)<div class="transaction-item"><div><strong>Rp{{ number_format($refund->amount,0,',','.') }}</strong><p>{{ $refund->reason }}</p><x-status :value="$refund->status"/>@if($refund->admin_notes)<p>{{ $refund->admin_notes }}</p>@endif</div></div>@endforeach<p class="muted">Progres dicatat admin. Refund tidak otomatis.</p></section>
             @endif
     <section class="panel flow-secondary">

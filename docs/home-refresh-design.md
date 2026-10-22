@@ -272,3 +272,17 @@ The supplied URL says /courts/3, but screenshot 2 shows the order/payment owner.
 Reject another pair of large option cards in a tinted container. The ticket groups schedule and billing together; two compact radio rows give a single comparison axis. Remove the large blue payment backdrop and repeated fine-print styling. Keep deadlines, DP forfeiture, actual amounts, terms, server validation and state branches intact. This supersedes the previous payment-card composition while retaining the shared sports header.
 
 Screenshot-led simplification verification: all 87 PHP tests (320 assertions), Vite build and Docker startup passed. Full isolated browser regression passed 15 checks/8 axe scans. Dedicated order-state checks passed at 320/390/768/1024/1440px with no page overflow and three further axe scans without violations. Verified DP/full/balance amounts and payment-button visibility, keyboard selection, required-terms validation/focus, paid/inactive/expired/refund/pending states, safe refund confirmation and history disclosure. No gateway payment was submitted. Desktop/mobile screenshots inspected: one ticket, larger reading text and two radio rows supersede the previous broad financial rows/tinted payment-card container. Static audit has zero findings; DESIGN lint has zero errors and six existing legacy warnings. Target is the checkout region shown in screenshot 2; /courts/{court} schedule was not changed in this revision.
+
+### Explicit two-column checkout request
+
+The user now explicitly requests left/right checkout at /bookings/5. Retain blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581 and Barlow/Manrope. Use the full shared content width with two equal, top-aligned columns: ticket/date/bill/deadline left; payment options/terms/action right. Keep the ticket's own contents stacked to avoid four competing columns. History/refund remain below both columns. At 900px and below, preserve reading order by stacking. No sticky panels or business-rule changes.
+
+```text
+[summary ticket + bill]   [choose DP/full + terms + pay]
+[deadline / notes]       [                            ]
+[refund / history / cancellation]
+```
+
+Review: this deliberately supersedes the earlier vertical-checkout preference. Keep the existing quiet ticket and radio rows; do not reintroduce multiple floating cards or a dense internal grid.
+
+Two-column checkout verification: 87 PHP tests (320 assertions), Vite build and Docker startup passed. Full browser regression passed 15 checks/8 axe scans; dedicated order checks passed all five widths with three additional axe scans without violations. Bounding-box checks confirm summary/payment share the top row at 1024/1440px and stack in DOM order at 320/390/768px. DP/full/balance amounts, terms validation, paid/inactive/refund/pending states, keyboard and confirmation behavior remain correct. Desktop screenshot inspected. No gateway payment was submitted; data fixtures remain in temporary SQLite. Strict audit: zero findings. DESIGN lint: zero errors and six existing legacy warnings.

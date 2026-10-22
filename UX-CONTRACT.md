@@ -59,3 +59,5 @@ RefundController and BookingService own the customer refund flow. Refund saya li
 
 ## Customer checkout reference revision
 The customer order detail now follows one vertical review/payment sequence instead of desktop columns, by explicit user request. Schedule/status and financial breakdown precede payment controls; history/refund/cancellation remain supplementary. The canonical payment radio, terms, form/feedback/dialog and polling owners, server permissions, amounts and state transitions remain unchanged.
+
+Latest checkout layout decision: the user explicitly requests two desktop columns (schedule/bill left, payment right); below 901px the same DOM order stacks. This supersedes the prior vertical-desktop checkout revision, without changing any financial, validation or navigation contract.
