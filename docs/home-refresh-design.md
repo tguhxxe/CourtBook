@@ -286,3 +286,18 @@ The user now explicitly requests left/right checkout at /bookings/5. Retain blue
 Review: this deliberately supersedes the earlier vertical-checkout preference. Keep the existing quiet ticket and radio rows; do not reintroduce multiple floating cards or a dense internal grid.
 
 Two-column checkout verification: 87 PHP tests (320 assertions), Vite build and Docker startup passed. Full browser regression passed 15 checks/8 axe scans; dedicated order checks passed all five widths with three additional axe scans without violations. Bounding-box checks confirm summary/payment share the top row at 1024/1440px and stack in DOM order at 320/390/768px. DP/full/balance amounts, terms validation, paid/inactive/refund/pending states, keyboard and confirmation behavior remain correct. Desktop screenshot inspected. No gateway payment was submitted; data fixtures remain in temporary SQLite. Strict audit: zero findings. DESIGN lint: zero errors and six existing legacy warnings.
+
+### Payment launch screen
+
+Refresh the POST-rendered customer.pay owner (/bookings/{booking}/payments). Palette: blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581. Barlow Condensed owns amount/heading; Manrope owns payment instructions/status. Left align reading text. Desktop uses a navy match receipt on the left and the launch/status area on the right; mobile stacks the receipt before the action. Preserve native progress and every payment/poll/retry hook.
+
+```text
+[shared nav / booking steps]
+[navy receipt: court / date/time / kind + amount] [heading / deadline]
+[                                              ] [open payment button]
+[                                              ] [live status + retry / order link]
+```
+
+Reject another photo hero on this final step: actual amount and a single payment action are the useful sports-ticket signature here. No decorative success indicator, fake trust badge or pre-verification confirmation. SDK callback, server reconciliation, expiry and redirects remain canonical. Verify the real POST flow with Laravel HTTP fakes and a browser SDK stub, never a real payment.
+
+Payment-launch verification: 87 PHP tests (320 assertions), Vite build and Docker build/startup passed. Full browser regression passed 15 checks/8 axe scans. Dedicated launch tests exercised the actual payment-start POST with Laravel HTTP fakes and blocked stray outbound requests, plus a stubbed Snap SDK: DP/full/balance amounts, keyboard launch, disabled state, close callback, missing SDK message, 419 session recovery, 429 retry and server-response redirect all passed. Five widths (320/390/768/1024/1440px) had no overflow; desktop/mobile axe scans returned zero violations. Both screenshots inspected. No real gateway call/payment was performed; all generated attempts are in temporary SQLite. Static audit returned zero findings; DESIGN lint returned zero errors and six existing legacy warnings. This remains a POST-rendered screen opened via Lanjut bayar; no GET payment-start route was introduced.

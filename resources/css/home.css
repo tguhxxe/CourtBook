@@ -180,6 +180,41 @@
 .home-payment-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: .75rem; padding: 0; margin: 0; list-style: none; }
 .home-payment-logos li { min-height: 64px; padding: .8rem 1rem; border-radius: 6px; background: var(--color-surface); display: flex; align-items: center; justify-content: center; }
 .home-payment-logos img { width: 100%; max-width: 100px; height: 32px; object-fit: contain; }
+/* Final payment step: match receipt left, gateway action and verification right. */
+.payment-launch { padding-block: 1rem 3.5rem; }
+.payment-launch .booking-steps { max-width: 780px; margin: 0 auto 2rem; }
+.payment-launch .booking-steps .step-number { font-family: var(--font-body); }
+.payment-launch-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 4rem; max-width: 66rem; margin-inline: auto; align-items: start; }
+.payment-match-receipt { padding: 2rem; background: var(--color-text); color: white; border-radius: 8px; }
+.payment-receipt-brand { display: flex; gap: 1rem; justify-content: space-between; align-items: start; margin-bottom: 2rem; }
+.payment-receipt-brand span { color: #d2def1; font-size: .8rem; overflow-wrap: anywhere; }
+.payment-receipt-brand svg { width: 32px; height: 32px; flex: none; color: #d2def1; }
+.home-page .payment-match-receipt h2 { font-size: clamp(2.5rem, 3.5vw, 3.3rem); color: white; line-height: 1.05; margin-bottom: 1.8rem; font-weight: 700; overflow-wrap: anywhere; }
+.payment-match-time { margin: 0; }
+.payment-match-time > div + div { margin-top: 1.1rem; }
+.payment-match-time dt { color: #d2def1; font-size: .8rem; margin-bottom: .3rem; }
+.payment-match-time dd { margin: 0; font-size: .95rem; line-height: 1.7; font-weight: 700; }
+.payment-match-time dd span { font-weight: 500; }
+.payment-launch-amount { border-top: 1px solid #6a83a6; margin-top: 2rem; padding-top: 1.5rem; }
+.payment-launch-amount > span, .payment-launch-amount > small { display: block; color: #d2def1; font-size: .85rem; }
+.payment-launch-amount > strong { display: block; font-family: var(--font-display); font-size: clamp(2.8rem, 4vw, 3.8rem); line-height: 1.2; font-weight: 700; margin-block: .4rem; overflow-wrap: anywhere; }
+.payment-launch-amount > small { font-size: .75rem; }
+.home-page .payment-launch h1 { font-size: clamp(2.8rem, 4vw, 3.7rem); font-weight: 700; line-height: 1.02; margin-bottom: 1rem; }
+.payment-launch-intro { color: var(--color-muted); font-size: .95rem; line-height: 1.8; max-width: 46ch; margin-bottom: 1.3rem; }
+.payment-launch-deadline { font-size: .875rem; margin-bottom: 1.3rem; line-height: 1.8; }
+.home-page .payment-launch .btn.primary { min-height: 54px; font-size: .95rem; border-radius: 6px; }
+.payment-launch .btn svg, .payment-launch-order-link svg { width: 20px; height: 20px; flex: none; }
+.payment-launch-sandbox { font-size: .75rem; color: var(--color-muted); line-height: 1.8; margin: .8rem 0 1.7rem; }
+.payment-launch-status { background: var(--home-tint); padding: 1.2rem 1.3rem; border-radius: 6px; }
+.home-page .payment-launch-status h2 { font-family: var(--font-body); font-size: .9rem; font-weight: 800; margin: 0 0 .6rem; }
+.payment-launch-status p { font-size: .875rem; line-height: 1.8; margin: 0; }
+.payment-launch-status .btn { margin-top: 1rem; min-height: 44px; background: white; border-radius: 5px; }
+.payment-launch-status .btn:hover { border-color: var(--color-primary); color: var(--color-primary); transform: none; }
+.payment-launch-help { color: var(--color-muted); font-size: .8rem; line-height: 1.8; margin: 1rem 0 .5rem; }
+.payment-launch-order-link { display: inline-flex; align-items: center; gap: .7rem; color: var(--color-primary); font-size: .85rem; font-weight: 700; min-height: 44px; }
+.payment-launch-order-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 900px) { .payment-launch-grid { grid-template-columns: minmax(0, 1fr); max-width: 38rem; gap: 2rem; } }
+@media (max-width: 540px) { .payment-match-receipt { padding: 1.5rem; } .payment-launch { padding-bottom: 2.5rem; } .payment-receipt-brand { margin-bottom: 1.3rem; } }
 /* Order review follows one sports-styled sheet through to payment. */
 .order-detail { padding-block: 1rem 3.5rem; }
 .order-heading { display: grid; grid-template-columns: 1.2fr 1fr; min-height: 240px; border-radius: 8px; overflow: hidden; background: var(--color-text); color: white; }

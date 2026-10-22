@@ -112,3 +112,7 @@ Customer /bookings/{booking} uses the shared blue shell with a navy sports headi
 The screenshot-led payment revision groups schedule/status and itemized billing into one match ticket. DP/full choices are two horizontal radio rows with the amount on the right, stacking on narrow screens. The payment area is white rather than a large tinted container, with 15–16px reading text. This supersedes the earlier two-card payment layout; the sports header and financial/server contracts remain unchanged.
 
 The latest explicit checkout request supersedes the vertical desktop layout: order-checkout-columns now places the stacked ticket/billing on the left and payment controls on the right, with equal widths and top alignment. The order sheet uses the 76rem shared width; at 900px or below it stacks summary before payment. History/refund remain below the pair. No payment behavior changed.
+
+## Blue payment launch
+
+customer/pay.blade.php uses the shared blue shell and payment-launch variant: navy match receipt (snapshot court/date, payment kind and attempt amount) on the left; gateway action/deadline/live status on the right. It stacks below 901px. The existing SDK, token, reconciliation/retry and server-authoritative redirect remain canonical. The status region owns data-payment-watch independently of the launch button. This view is rendered after a valid POST payment start; no GET mutation route is added.
