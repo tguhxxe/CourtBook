@@ -10,5 +10,7 @@
         @case('chevron')<path d="m7 10 5 5 5-5"/>@break
         @case('menu')<path d="M4 7h16M4 12h16M4 17h16"/>@break
         @case('plus')<path d="M5 12h14M12 5v14"/>@break
+        @case('tennis')<ellipse cx="14" cy="9" rx="5.5" ry="7" transform="rotate(35 14 9)"/><path d="m10 15-6 7m-1-1 3 2M12 3l7 7M9 6l8 8M9 10l7-7m-5 11 8-8"/>@break
+        @case('soccer')<circle cx="12" cy="12" r="9"/><path d="m12 7 5 4-2 6H9l-2-6 5-4Zm0-4v4m9 4h-4m0 8-2-2m-8 2 2-2m-6-6h4"/>@break
     @endswitch
 </svg>

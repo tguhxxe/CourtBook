@@ -29,27 +29,12 @@
 
 <section class="home-wrap home-section home-courts" aria-labelledby="home-courts-title">
     <div class="home-section-heading">
-        <div><h2 id="home-courts-title">Pilih lapanganmu.</h2><p>Untuk latihan rutin, main santai, atau kumpul satu tim.</p></div>
+        <div><h2 id="home-courts-title">Pilih lapanganmu.</h2><p>Temukan lapangan pilihanmu, lalu cek waktu bermain yang pas.</p></div>
         <a class="home-inline-link" href="{{ route('courts.index') }}">Lihat semua lapangan <x-home-icon name="arrow"/></a>
     </div>
     <div class="home-court-grid">
         @forelse($courts as $court)
-            <article class="home-court">
-                <a class="home-court-image-link" href="{{ route('courts.show', $court) }}" aria-label="Lihat jadwal {{ $court->name }}">
-                    <img src="{{ asset('images/home/'.($court->sport === 'soccer' ? 'mini-soccer' : 'blue-tennis-court').'.webp') }}" width="1536" height="1024" alt="Ilustrasi {{ $court->sport === 'soccer' ? 'lapangan mini soccer' : 'lapangan tenis hard court' }}" loading="lazy" @class(['home-court-image', 'home-court-image-alternate' => $loop->index === 1])>
-                    <span class="home-sport-label">{{ $court->sport === 'soccer' ? 'Mini soccer' : 'Tenis' }}</span>
-                </a>
-                <div class="home-court-content">
-                    <h3><a href="{{ route('courts.show', $court) }}">{{ $court->name }}</a></h3>
-                    <p class="home-court-facilities">{{ $court->sport === 'soccer' ? 'Arena rumput sintetis untuk bermain bersama tim.' : 'Hard court untuk latihan dan permainan berikutnya.' }}</p>
-                    @if(count($court->facilities ?? []))
-                        <ul class="home-facilities" aria-label="Fasilitas {{ $court->name }}">
-                            @foreach(array_slice($court->facilities, 0, 2) as $facility)<li><x-home-icon name="check"/>{{ $facility }}</li>@endforeach
-                        </ul>
-                    @endif
-                    <div class="home-court-booking"><p><strong>Rp{{ number_format($court->hourly_rate, 0, ',', '.') }}</strong><span> / jam</span></p><a class="home-schedule-link" href="{{ route('courts.show', $court) }}" aria-label="Lihat jadwal {{ $court->name }}">Lihat jadwal <x-home-icon name="arrow"/></a></div>
-                </div>
-            </article>
+            <x-home.court-card :court="$court"/>
         @empty
             <div class="home-empty"><h3>Lapangan sedang disiapkan.</h3><p>Belum ada lapangan yang bisa ditampilkan. Silakan cek kembali nanti.</p><a class="home-inline-link" href="{{ route('courts.index') }}">Buka daftar lapangan <x-home-icon name="arrow"/></a></div>
         @endforelse

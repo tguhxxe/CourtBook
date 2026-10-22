@@ -48,6 +48,23 @@ The photographic court entrance is the single expressive element. A generic floa
 
 ## Token ownership and rollback
 
+### Featured court card refresh
+
+The user rejected the plain white catalogue cards. Retain court blue `#1455d9`, navy `#102c59`, ice `#edf4ff`, white `#ffffff`, slate `#526581` and the established Manrope/Barlow Condensed pair. Use a sports-venue poster composition: a dominant photograph with a readable navy-backed court title, then a compact facilities/price/action panel. All text is left aligned; image and action dimensions are reserved. No ratings, availability badges, fabricated discounts or decorative numbering.
+
+```text
+[sport]                    [sport icon]
+              court photograph
+Court name in athletic display type
+Surface type
+--------------------------------------
+actual facilities
+Tarif per jam       [Lihat jadwal]
+Rp100.000
+```
+
+A more ornate white card with shadows and extra labels was rejected because it preserves the current generic composition. The chosen signature is the photograph/title pairing; supporting information is compact and quiet. Mobile stacks the same information without hiding actions. Titles support long names; prices and facilities remain server data. The image overlay exists for text contrast, not decorative color.
+
 Model B: `resources/css/home.css` owns the home theme and remaps the established semantic variables under `.home-page`. `DESIGN.md` records the accepted home variant. It is imported only on the home route. Existing application tokens and components remain canonical elsewhere. Keep the work on this branch; returning to `main` restores the previous homepage.
 
 ## Verification — 2026-10-22
@@ -85,3 +102,5 @@ docker compose up --build -d
 This refresh introduces no database migrations or payment/business-rule changes. The preview images, court descriptions and venue remain simulated.
 
 Navbar/footer extraction verification: all 87 application tests passed. The rendered navbar/footer DOM and screenshot hashes before/after extraction matched at 1440px and 390px; the mobile menu opened successfully. The strict premium audit reported zero findings, and Docker rebuilt and started successfully. This is a structure-only refactor; existing CSS and booking behavior are retained.
+
+Featured court refresh verification: 87 application tests passed. Vite and Docker builds succeeded. Read-only Chrome checks at 320/390/768/1024/1440px found no page overflow or clipped card panels; all images loaded, schedule navigation reached the existing court route, long names wrapped, and reduced-motion disabled image transitions. Desktop/mobile axe scans reported zero violations. The strict premium audit reported zero findings, and DESIGN.md lint returned zero errors with the six existing legacy token-reference warnings. Desktop and actual mobile viewport screenshots were inspected; prices and actions remain readable.
