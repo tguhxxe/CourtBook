@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('auth.form', ['mode' => 'login']);
+        return view('auth.login');
     }
 
     public function register()

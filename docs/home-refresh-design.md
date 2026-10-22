@@ -159,3 +159,20 @@ Extend the approved home theme to /courts on the same design branch. Palette: bl
 A second photographic hero was rejected: photos already provide identity in the reusable court cards, and the catalogue should reach the filters quickly. No new decorative badges or availability claims. Empty results and validation retain visible recovery. Shared navbar resolves the current route and links back to the home guide from the catalogue. Only catalogue joins the blue shell; schedule/checkout keep their existing implementation in this task.
 
 Catalogue verification: all 87 PHP tests (320 assertions) and production Vite build passed. Full browser flow passed 15 checks/8 axe scans against isolated SQLite, including customer booking/cancellation and admin CRUD. Home regression passed 13 checks/5 axe scans after updating its expected catalogue theme; full-flow logout now opens the shared account menu. Dedicated catalogue inspection covered 320/390/768/1024/1440px, search/clear/sport filters, empty state, validation with focused summary, schedule keyboard navigation, home guide links, long names and reduced motion. Three catalogue axe scans and an additional 320px pagination scan returned zero violations. Eleven temporary fixture courts verified the 9/2 page split, previous/next boundaries, retained query/filter/page and keyboard navigation. Fixture data exists only in the temporary test database. Desktop/mobile screenshots were inspected. Docker app/scheduler are healthy; read-only inspection confirmed blue tokens and loaded footer payment logos. Strict audit: zero findings; DESIGN lint: zero errors, six existing legacy token warnings. No payment logic, schema or customer data changed; schedule/checkout retain their previous theme.
+
+### Sports login refresh
+
+Extend the accepted blue identity to /login only. Palette: court blue #1455d9, navy #102c59, white #ffffff, ice #edf4ff, slate #526581. Barlow Condensed owns the athletic headings; Manrope owns labels and form text. Reuse the blue shell and canonical field/feedback/password-toggle/submit behavior. Left-align all form content.
+
+```text
+[shared blue navigation]
+[court photograph + short sports headline | focused email/password form]
+[                                        | remember / forgot / sign in]
+[                                        | create account]
+[shared footer]
+Mobile: focused form; omit the nonessential photo panel.
+```
+
+Reject a floating form card over a full-screen photograph: it competes with the inputs and introduces unnecessary overlay styling. Spend the visual emphasis on one reserved photo panel; keep the form plain white without shadows or badges. Feedback belongs inside the form column above its fields. Existing session, rate-limit, generic credential errors and intended redirect remain server-owned. Registration and password recovery retain their existing screens in this scoped task.
+
+Login verification: 87 application tests (320 assertions) and Vite build passed. Full isolated browser regression passed 15 checks/8 axe scans, including customer/admin login and booking/admin flows. Dedicated login checks passed at 320/390/768/1024/1440px with no page overflow; three axe scans reported zero violations. Empty/invalid submissions focused canonical feedback, preserved email/remember and cleared the password. Keyboard password visibility, unchanged submit dimensions/busy label, recovery/register links and intended /profile redirect passed. Desktop and mobile/error screenshots were inspected. Docker rebuilt with healthy app/scheduler. Strict audit: zero findings; DESIGN lint: zero errors, six existing legacy token warnings. Registration/recovery, authentication rules and database schema remain outside this visual change.

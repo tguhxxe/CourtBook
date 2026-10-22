@@ -92,3 +92,7 @@ The homepage navbar stays at the viewport top using CSS sticky positioning and a
 ## Blue court catalogue
 
 The user extended the accepted home theme to /courts. It reuses layouts/home, the sticky home navbar/footer and home court-card, with a pale blue heading and a quiet white search area. Current-route markers and guide links work on both routes. Booking stages retain their canonical component; fields, native sport select, validation, explicit GET search and nine-result pagination retain the existing contracts. The catalogue pagination view `components/home/pagination.blade.php` uses the same server paginator and query-preserving URLs with Indonesian labels. It is the blue-shell variant; existing application pagination is retained elsewhere. Photos retain their illustration disclaimer. Schedule and checkout are outside this migration.
+
+## Blue login
+
+/login uses the shared blue shell and a split court photograph/form composition, owned by auth/login.blade.php and scoped sports-login classes in home.css. The optional inlineFeedback layout parameter moves the canonical feedback component into the form column. The photo is decorative and labeled as an illustration; it is omitted on narrow screens so the form comes first. Inputs, error associations, password visibility and busy state reuse the canonical field/feedback/app.js owners. No authentication/session/permission behavior changed; other auth modes retain auth/form.blade.php.

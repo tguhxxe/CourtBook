@@ -14,7 +14,9 @@
     <a class="skip" href="#main">Lewati ke konten</a>
     <x-home.navbar/>
     <main id="main" tabindex="-1">
-        <div class="home-wrap home-feedback">@include('components.feedback')</div>
+        @unless($inlineFeedback ?? false)
+            <div class="home-wrap home-feedback">@include('components.feedback')</div>
+        @endunless
         @yield('content')
     </main>
     <x-home.footer/>
