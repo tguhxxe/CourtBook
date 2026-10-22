@@ -96,3 +96,7 @@ The user extended the accepted home theme to /courts. It reuses layouts/home, th
 ## Blue login
 
 /login uses the shared blue shell and a split court photograph/form composition, owned by auth/login.blade.php and scoped sports-login classes in home.css. The optional inlineFeedback layout parameter moves the canonical feedback component into the form column. The photo is decorative and labeled as an illustration; it is omitted on narrow screens so the form comes first. Inputs, error associations, password visibility and busy state reuse the canonical field/feedback/app.js owners. No authentication/session/permission behavior changed; other auth modes retain auth/form.blade.php.
+
+## Blue booking history
+
+/bookings joins the shared blue shell. Customer history uses customer/booking-summary.blade.php: open schedule rows with snapshot court name/code, native status badges, date/time/duration, active booking payment deadlines, total and a detail link. Mobile stacks identity and schedule above total/action. The shared blue pagination now accepts itemLabel/paginationLabel for catalogue or bookings, retaining server queries. Status filtering, ten-row pagination, newest-first order, expiry and customer-only ownership remain server contracts. Empty-filter recovery and first-booking guidance are distinct. Admin tables and the booking detail/checkout retain their existing owners.

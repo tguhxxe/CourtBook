@@ -1,6 +1,8 @@
+@php($itemLabel = $itemLabel ?? 'lapangan')
+@php($paginationLabel = $paginationLabel ?? 'Halaman daftar lapangan')
 @if($paginator->hasPages())
-<nav class="catalog-pagination" aria-label="Halaman daftar lapangan">
-    <p>Menampilkan {{ $paginator->firstItem() ?? 0 }}–{{ $paginator->lastItem() ?? 0 }} dari {{ $paginator->total() }} lapangan</p>
+<nav class="catalog-pagination" aria-label="{{ $paginationLabel }}">
+    <p>Menampilkan {{ $paginator->firstItem() ?? 0 }}–{{ $paginator->lastItem() ?? 0 }} dari {{ $paginator->total() }} {{ $itemLabel }}</p>
     <div>
         @if($paginator->onFirstPage())
             <span aria-disabled="true">Sebelumnya</span>

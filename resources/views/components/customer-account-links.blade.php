@@ -1,5 +1,5 @@
 @auth
-    <a href="{{ route('bookings.index') }}" @class(['current' => request()->routeIs('bookings.*')])>Booking saya</a>
+    <a href="{{ route('bookings.index') }}" @if(request()->routeIs('bookings.index')) aria-current="page" @endif @class(['current' => request()->routeIs('bookings.*')])>Booking saya</a>
     @if(auth()->user()->role === 'customer')
         <a href="{{ route('refunds.index') }}" @class(['current' => request()->routeIs('refunds.*')])>Refund saya</a>
     @endif

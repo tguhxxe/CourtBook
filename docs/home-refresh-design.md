@@ -176,3 +176,20 @@ Mobile: focused form; omit the nonessential photo panel.
 Reject a floating form card over a full-screen photograph: it competes with the inputs and introduces unnecessary overlay styling. Spend the visual emphasis on one reserved photo panel; keep the form plain white without shadows or badges. Feedback belongs inside the form column above its fields. Existing session, rate-limit, generic credential errors and intended redirect remain server-owned. Registration and password recovery retain their existing screens in this scoped task.
 
 Login verification: 87 application tests (320 assertions) and Vite build passed. Full isolated browser regression passed 15 checks/8 axe scans, including customer/admin login and booking/admin flows. Dedicated login checks passed at 320/390/768/1024/1440px with no page overflow; three axe scans reported zero violations. Empty/invalid submissions focused canonical feedback, preserved email/remember and cleared the password. Keyboard password visibility, unchanged submit dimensions/busy label, recovery/register links and intended /profile redirect passed. Desktop and mobile/error screenshots were inspected. Docker rebuilt with healthy app/scheduler. Strict audit: zero findings; DESIGN lint: zero errors, six existing legacy token warnings. Registration/recovery, authentication rules and database schema remain outside this visual change.
+
+### Booking history blue refresh
+
+Adopt the accepted sports palette: blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581. Barlow Condensed owns the page/court headings; Manrope owns dates, status and form text. Left-align content, with the existing home blue shell and a short pale-blue heading.
+
+```text
+[Booking saya                         Cari lapangan]
+[status select / Tampilkan / reset     count]
+[court + code/status | date/time | total | detail]
+[court + code/status | date/time | total | detail]
+[query-preserving pagination]
+Mobile: court/status → schedule/deadline → total/detail.
+```
+
+Photo cards and summary metric tiles were rejected: this is a schedule-management page, so they would distract from the actual booking data. Use open match-schedule rows with one separator per booking. Reuse the canonical status badges, native select, feedback, and blue pagination (parameterized noun). Preserve booking snapshots, server ownership/expiry, ten items per page, creation order, filter URL and detail/payment/cancellation routes. Only active held/partial bookings expose their existing deadlines; cancelled/expired bookings never imply an amount is still payable. Empty filter results offer reset; a new customer receives a court-catalogue action.
+
+Booking history verification: all 87 application tests (320 assertions), Vite production build and Docker rebuild passed. Full browser regression against isolated SQLite passed 15 checks/8 axe scans, including customer booking/cancellation and admin CRUD. A dedicated history check used 16 own booking snapshots plus one foreign booking, with held/partial/paid/cancelled/expired states; it verified no foreign data, active-only deadlines, 10-row pagination, filter query preservation, previous/next keyboard navigation, detail navigation, focused invalid-status feedback and distinct empty/filter-empty recovery. Desktop/mobile and empty-state screenshots were inspected. Widths 320/390/768/1024/1440px had no page overflow, including a long court name; three additional axe scans returned zero violations. Strict audit: zero findings; DESIGN lint: zero errors and six existing legacy token warnings. Fixtures remain only in /tmp test SQLite; production booking data, rules and controllers were not changed. Admin history retains its canonical table.
