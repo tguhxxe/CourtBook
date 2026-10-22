@@ -1,0 +1,15 @@
+{
+  "source": "https://midtrans.com/features/payment-methods",
+  "retrieved": "2026-10-22",
+  "note": "Original payment brand assets from Midtrans. BRI uses the BRIVA virtual-account mark. Trademarks belong to their respective owners.",
+  "logos": {
+    "gopay": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2026/10/974d6ee61cf857dce43e02e2a8d6ea1c_f2dd85027fd595a5da7d5ce1ac24d10b_compressed.png",
+    "qris": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2021/03/5db129dbf7357fd4b59fe9fbbf883f74_e82f1494c766508e8bb827c564ccf373_compressed.png",
+    "dana": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2024/10/b737877a71b67787615112f4854b30b6_e2190f206776feffdd640a8cc617a45e_compressed.png",
+    "bca": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/fc68a00838f69124fddaf64e30f5e958_ca45aac69ce87ce691c3e6582894b6f0_compressed.png",
+    "bni": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/f6f57e9126c57179cf729cc9586e47c0_e26ce4cce944fe379072ae509fe72ec1_compressed.png",
+    "bri": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/7591290494be00b0470598db60efa1ad_d60ae495ef3a7e26168752e1a9fb4104_compressed.png",
+    "mandiri": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/11f8970a182ad8cf6aaf0a0cd22dd9ad_3948cb3bf5c4887c7cca7ca7ee421708_compressed.png",
+    "bsi": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2026/01/e532a2a311c008bd57860e0d2421a1b1_9cef30936521d99ed6cfc577a02a98bd_compressed.png"
+  }
+}

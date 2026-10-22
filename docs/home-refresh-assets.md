@@ -31,3 +31,9 @@ Fonts are hosted locally, emitted by Vite, and preloaded on the home route only.
 - [Barlow Condensed Bold](https://github.com/google/fonts/tree/main/ofl/barlowcondensed): `resources/fonts/BarlowCondensed-Bold.ttf`.
 - [Manrope Variable](https://github.com/google/fonts/tree/main/ofl/manrope): `resources/fonts/Manrope-Variable.ttf`.
 - SIL Open Font License copies: `resources/fonts/licenses/`.
+
+## Footer payment logos
+
+The eight non-generated payment marks are downloaded from [Midtrans's official payment-method page](https://midtrans.com/features/payment-methods) and hosted locally in `public/images/payments/`. Exact asset URLs and retrieval date are in `public/images/payments/sources.json`. Original colors/aspect ratios are preserved. BRI uses the BRIVA virtual-account mark supplied by Midtrans. No logo is synthesized or reconstructed as text.
+
+The footer defers actual method availability to checkout; adding a logo does not configure a merchant payment channel. Verification: all eight images loaded at 320/390/768/1440px without page overflow; footer axe scans at desktop/mobile reported no violations. Home feature tests, Vite build and strict premium audit passed.
