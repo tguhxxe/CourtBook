@@ -4,7 +4,7 @@
 @section('content')
 <div class="home-wrap booking-flow payment-launch">
     <a class="schedule-back" href="{{ route('bookings.show', $booking) }}">&larr; Kembali ke pesanan</a>
-    <x-booking-steps :current="4"/>
+    <x-booking-steps :current="2"/>
     <div class="payment-launch-grid">
         <section class="payment-match-receipt" aria-labelledby="payment-court-name">
             <div class="payment-receipt-brand"><span>Pesanan {{ $booking->code }}</span><x-logo/></div>

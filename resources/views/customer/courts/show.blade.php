@@ -16,7 +16,7 @@
             <figcaption>Ilustrasi, bukan foto lokasi sebenarnya.</figcaption>
         </figure>
     </header>
-    <x-booking-steps :current="2"/>
+    <x-booking-steps :current="1"/>
     <div class="schedule-sheet">
         <h2 class="schedule-sheet-title">Atur jadwal bermain.</h2>
         <section class="date-panel" aria-label="Pilih tanggal bermain">

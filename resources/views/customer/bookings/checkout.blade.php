@@ -15,7 +15,7 @@
         </div>
         <figure><img src="{{ asset('images/home/'.$courtIllustration.'.webp') }}" width="1536" height="1024" alt="" fetchpriority="high"><figcaption>Ilustrasi olahraga</figcaption></figure>
     </header>
-    @if($canPay)<x-booking-steps :current="3"/>@endif
+    @if($canPay)<x-booking-steps :current="1"/>@endif
     <div class="order-sheet">
     @if($booking->status === 'confirmed' && $booking->paid_amount)
     <div class="notice success" role="status">{{ $booking->payment_status === 'paid' ? 'Pembayaran berhasil. Booking sudah lunas.' : 'Pembayaran DP berhasil. Booking dikonfirmasi; silakan lunasi sisa tagihan sebelum batas waktu.' }}</div>
