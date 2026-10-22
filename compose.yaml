@@ -1,0 +1,40 @@
+name: courtbook
+
+x-app: &app
+  image: courtbook-local
+  build:
+    context: .
+    dockerfile: docker/local.Dockerfile
+  init: true
+  environment:
+    APP_URL: http://127.0.0.1:${COURTBOOK_PORT:-8000}
+    MIDTRANS_SERVER_KEY: ${MIDTRANS_SERVER_KEY:-}
+    MIDTRANS_CLIENT_KEY: ${MIDTRANS_CLIENT_KEY:-}
+    MIDTRANS_MERCHANT_ID: ${MIDTRANS_MERCHANT_ID:-}
+    MIDTRANS_PUBLIC_URL: ${MIDTRANS_PUBLIC_URL:-}
+  volumes:
+    - app-data:/data
+    - app-storage:/app/storage
+
+services:
+  app:
+    <<: *app
+    ports:
+      - "127.0.0.1:${COURTBOOK_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "php", "-r", "exit(@file_get_contents('http://127.0.0.1:8000/up') === false ? 1 : 0);"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 30s
+
+  scheduler:
+    <<: *app
+    command: ["php", "artisan", "schedule:work"]
+    depends_on:
+      app:
+        condition: service_healthy
+
+volumes:
+  app-data:
+  app-storage:

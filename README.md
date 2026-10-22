@@ -2,7 +2,32 @@
 
 Aplikasi lokal praktikum PKPL/SQA untuk booking tenis dan mini soccer. Teguh Setia - 202310370311061 - Kelas B; asisten Modul 1 Alip. Tema belum disetujui, deadline belum diketahui. Fokus uji role Pelanggan sampai UAP; admin mendukung operasional. Venue, alamat/fasilitas, akun demo dan ilustrasi adalah simulasi.
 
-## Lingkungan
+## Menjalankan dengan Docker (Linux dan Windows)
+
+Cara yang disarankan untuk pindah komputer/OS. Siapkan Git dan Docker dengan Compose v2. Di Windows, pasang [Docker Desktop dengan backend WSL 2](https://docs.docker.com/desktop/setup/install/windows-install/) dan gunakan Linux containers. Di Linux, gunakan Docker Engine + Compose plugin atau Docker Desktop. Pastikan Docker berjalan (`docker info`). PHP, Composer, Node, dan SQLite di host tidak perlu dipasang.
+
+Setelah clone repository, buka terminal di folder CourtBook (PowerShell di Windows atau terminal Linux), lalu:
+
+```sh
+docker compose up --build -d
+```
+
+Buka **http://127.0.0.1:8000**. Build pertama memerlukan internet dan dapat memakan beberapa menit. Perintah ini membangun aset, memasang dependensi sesuai lock file, menyiapkan `.env` internal dan APP_KEY, menjalankan migrasi, membuat data/akun demo pada database baru, serta menjalankan aplikasi dan scheduler. Tidak perlu menyalin `.env` atau menjalankan Composer/npm/artisan secara manual di host.
+
+```sh
+docker compose ps                 # app harus healthy; scheduler running
+docker compose logs --tail=100 app scheduler
+docker compose down              # hentikan; database tetap tersimpan
+docker compose up -d             # jalankan kembali
+```
+
+Setelah `git pull` atau mengubah kode, jalankan ulang `docker compose up --build -d`. Kode dan aset dimasukkan ke image, sehingga perubahan kode memerlukan rebuild. Docker menggunakan PHP 8.4 dan Node 22; dependensi aplikasi mengikuti `composer.lock` dan `package-lock.json`. Jangan commit `.env`, database, `vendor`, atau `node_modules`. Commit konfigurasi Docker bersama kode agar tersedia setelah clone.
+
+Database SQLite, APP_KEY, serta storage/log disimpan dalam named volumes Docker, terpisah dari instalasi manual di host. Data bertahan setelah `down` dan rebuild; **`docker compose down -v` menghapus data lokal Docker**. Volume bersifat lokal per komputer: Git memindahkan kode, bukan akun/booking/upload yang sudah dibuat. Clone baru mendapat data demo baru. Jika perlu memindahkan data yang sudah ada, lihat [panduan Docker](docs/docker.md).
+
+Akun demo ada pada bagian **Akun simulasi lokal** di bawah. Konfigurasi ini untuk pengembangan/demo lokal. Panduan port, Midtrans, backup, dan troubleshooting: [docs/docker.md](docs/docker.md).
+
+## Lingkungan tanpa Docker (opsional)
 Laravel 12; PHP 8.4+ (lock dependency saat ini memakai komponen Symfony 8 yang memerlukan PHP 8.4); Composer 2; Node 22.20+/npm; SQLite pdo_sqlite. PHP global Laragon 8.1 tidak dipakai. Pada komputer ini PHP portabel berada di `%LOCALAPPDATA%/CourtBook/php84` dan wrapper `scripts/php.ps1` memilihnya tanpa mengubah PATH/global. Runtime portabel tidak disimpan di repository. Komputer lain gunakan PHP 8.4 dengan curl/fileinfo/mbstring/openssl/pdo_sqlite/sqlite3/zip. Unduh PHP Windows resmi: https://www.php.net/downloads.php?os=windows .
 
 ## Instalasi baru
