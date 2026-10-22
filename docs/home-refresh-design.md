@@ -193,3 +193,22 @@ Mobile: court/status → schedule/deadline → total/detail.
 Photo cards and summary metric tiles were rejected: this is a schedule-management page, so they would distract from the actual booking data. Use open match-schedule rows with one separator per booking. Reuse the canonical status badges, native select, feedback, and blue pagination (parameterized noun). Preserve booking snapshots, server ownership/expiry, ten items per page, creation order, filter URL and detail/payment/cancellation routes. Only active held/partial bookings expose their existing deadlines; cancelled/expired bookings never imply an amount is still payable. Empty filter results offer reset; a new customer receives a court-catalogue action.
 
 Booking history verification: all 87 application tests (320 assertions), Vite production build and Docker rebuild passed. Full browser regression against isolated SQLite passed 15 checks/8 axe scans, including customer booking/cancellation and admin CRUD. A dedicated history check used 16 own booking snapshots plus one foreign booking, with held/partial/paid/cancelled/expired states; it verified no foreign data, active-only deadlines, 10-row pagination, filter query preservation, previous/next keyboard navigation, detail navigation, focused invalid-status feedback and distinct empty/filter-empty recovery. Desktop/mobile and empty-state screenshots were inspected. Widths 320/390/768/1024/1440px had no page overflow, including a long court name; three additional axe scans returned zero violations. Strict audit: zero findings; DESIGN lint: zero errors and six existing legacy token warnings. Fixtures remain only in /tmp test SQLite; production booking data, rules and controllers were not changed. Admin history retains its canonical table.
+
+### Blue court schedule
+
+Refresh /courts/{court} through its shared template, including the requested /courts/3. Retain blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581; semantic warning/success colors stay canonical. Barlow Condensed for court and section headings, Manrope for fields, times and amounts. Left-align reading content.
+
+```text
+[shared sticky blue navigation]
+[booking stages]
+[court name / sport / hourly rate          small court photograph]
+[date field + show schedule / Today / Tomorrow]
+[duration + labelled time radios          | selected time / total / DP]
+[court information disclosure            | continue to review]
+[shared footer]
+Mobile: date → duration/time → summary, without decorative photograph.
+```
+
+A full photographic hero was rejected because it delays schedule selection. The compact photo is the single sports accent; the actual controls remain on quiet white surfaces. Extend canonical booking-flow/field/radio/select components through court-schedule styling, retaining data hooks, explicit date submit, stale-date blocking, duration-fit availability and server validation. Native date/select popup behavior stays accepted. Summary sticks below the shared navbar only when the viewport can accommodate it. No new booking/payment states or fabricated availability.
+
+Schedule verification: 87 PHP tests (320 assertions), Vite production build and Docker rebuild passed. Full isolated browser regression passed 15 checks/8 axe scans, including booking/cancellation and admin maintenance. Dedicated /courts/3 checks at 320/390/768/1024/1440px passed with no overflow and three additional axe scans without violations. Covered guest action, reserved/maintenance labels, keyboard radio selection, two-hour total/DP for mini soccer, clearing a selection when duration no longer fits, stale-date submit blocking, fully unavailable day recovery, keyboard court-information disclosure, summary below navbar and static on short screens, long names, reduced motion and successful two-hour booking creation. Fixtures and booking creation exist only in /tmp test SQLite. Desktop/mobile screenshots were inspected. Strict audit: zero findings; DESIGN lint: zero errors with six existing legacy token warnings. Native date/select popups retain OS formatting by the maintained contract. Availability, payment rules and controllers were not modified.

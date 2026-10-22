@@ -100,3 +100,7 @@ The user extended the accepted home theme to /courts. It reuses layouts/home, th
 ## Blue booking history
 
 /bookings joins the shared blue shell. Customer history uses customer/booking-summary.blade.php: open schedule rows with snapshot court name/code, native status badges, date/time/duration, active booking payment deadlines, total and a detail link. Mobile stacks identity and schedule above total/action. The shared blue pagination now accepts itemLabel/paginationLabel for catalogue or bookings, retaining server queries. Status filtering, ten-row pagination, newest-first order, expiry and customer-only ownership remain server contracts. Empty-filter recovery and first-booking guidance are distinct. Admin tables and the booking detail/checkout retain their existing owners.
+
+## Blue court schedule
+
+/courts/{court} now uses the blue shell and court-schedule variant of the canonical booking-flow. A compact court identity/photo header precedes date, duration and native time radios. The photo is labeled as an illustration and omitted on narrow screens. Active slots use blue, unavailable slots carry explicit reason text, and maintenance uses the shared warning semantics. The summary sits below the sticky navbar on tall desktops and stacks naturally on mobile or short viewports. Fields, status/validation feedback, data hooks and availability calculations remain owned by the existing booking components and booking.js. The checkout is not part of this visual migration.
