@@ -180,6 +180,73 @@
 .home-payment-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: .75rem; padding: 0; margin: 0; list-style: none; }
 .home-payment-logos li { min-height: 64px; padding: .8rem 1rem; border-radius: 6px; background: var(--color-surface); display: flex; align-items: center; justify-content: center; }
 .home-payment-logos img { width: 100%; max-width: 100px; height: 32px; object-fit: contain; }
+/* Order review follows one sports-styled sheet through to payment. */
+.order-detail { padding-block: 1rem 3.5rem; }
+.order-heading { display: grid; grid-template-columns: 1.2fr 1fr; min-height: 240px; border-radius: 8px; overflow: hidden; background: var(--color-text); color: white; }
+.order-heading > div { padding: 2.2rem 2.5rem; align-self: center; }
+.order-heading .order-code { font-size: .75rem; color: #d2def1; margin: 0 0 .8rem; overflow-wrap: anywhere; }
+.home-page .order-heading h1 { color: white; font-size: clamp(2.8rem, 4vw, 4rem); font-weight: 700; line-height: 1.05; margin: 0 0 1rem; }
+.order-heading > div > p:last-child { color: #d2def1; font-size: .875rem; margin: 0; max-width: 45ch; }
+.order-heading figure { position: relative; min-height: 240px; margin: 0; }
+.order-heading img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.order-heading figcaption { position: absolute; bottom: .7rem; left: .7rem; background: #102c59ed; color: white; font-size: .65rem; padding: .2rem .5rem; border-radius: 3px; }
+.order-detail .booking-steps { max-width: 780px; margin: 1.3rem auto 0; }
+.order-detail .booking-steps .step-number { font-family: var(--font-body); }
+.order-sheet { max-width: 64rem; margin-inline: auto; padding-top: 2rem; }
+.home-page .order-detail .panel { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.home-page .order-detail h2 { font-size: 2rem; font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
+.order-detail .eyebrow { display: none; }
+.order-detail .notice { font-size: .875rem; overflow-wrap: anywhere; }
+.order-detail .order-summary > h2 { font-size: 2.6rem; margin-bottom: 1.3rem; }
+.order-detail .schedule-summary { display: grid; grid-template-columns: 1.3fr 1fr .6fr; gap: 1.3rem; margin-block: 0 1.3rem; }
+.order-detail .schedule-summary small { font-size: .75rem; }
+.order-detail .schedule-summary strong { font-size: .95rem; margin-top: .3rem; }
+.order-detail .actions { gap: .5rem; }
+.order-detail .badge { white-space: normal; }
+.order-detail .price-summary { margin-top: 1.5rem; }
+.order-detail .price-summary > div { font-size: .9rem; align-items: baseline; padding-block: .9rem; }
+.order-detail .price-summary dt { max-width: 60%; }
+.order-detail .price-summary dd { white-space: normal; overflow-wrap: anywhere; text-align: right; }
+.order-detail .price-summary .total dd { font-family: var(--font-display); font-size: 2.3rem; font-weight: 700; line-height: 1.2; }
+.order-change-note { font-size: .8rem; color: var(--color-muted); margin: 0; }
+.home-page .order-detail .flow-summary { position: static; padding: 1.8rem; border-radius: 8px; background: var(--home-tint); margin-block: 2rem; }
+.order-detail .flow-summary > p { font-size: .9rem; max-width: 70ch; }
+.order-detail .payment-options:has(input[type=radio]) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.order-detail .payment-options > .field-error { grid-column: 1 / -1; margin: 0; }
+.order-detail .payment-option { margin: 0; background: white; border-radius: 6px; padding: 1.2rem; }
+.order-detail .payment-option:hover { border-color: var(--color-primary); }
+.order-detail .payment-option:has(input:checked) { background: white; }
+.order-detail .payment-option:has(input:focus-visible) { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+.order-detail .payment-option b { font-family: var(--font-display); font-weight: 700; font-size: 2rem; }
+.order-detail .payment-option small { font-size: .8rem; }
+.order-detail .flow-summary .small-copy { font-size: .8rem; line-height: 1.8; }
+.order-detail .terms-check { margin-block: 1.3rem .6rem; align-items: start; }
+.order-detail .terms-check input { margin-top: .25rem; }
+.home-page .order-detail .btn.primary { min-height: 52px; gap: .4rem; }
+.home-page .order-detail .btn.primary > span { display: inline; }
+.order-detail .btn.outline:hover { background: var(--home-tint); color: var(--color-primary); border-color: var(--color-primary); transform: none; }
+.order-detail .flow-summary .btn.outline { background: white; }
+.order-detail .flow-help { font-size: .75rem; }
+.order-detail .flow-details { font-size: .875rem; overflow-wrap: anywhere; }
+.order-detail .flow-details summary { min-height: 44px; display: list-item; align-content: center; padding-block: .5rem; }
+.order-detail .flow-details .terms { font-size: .85rem; }
+.home-page .order-detail .flow-secondary { border-top: 1px solid var(--color-border); padding-top: .5rem; }
+.order-detail .transaction-item > div { min-width: 0; }
+.order-detail .transaction-item .mono { overflow-wrap: anywhere; }
+.order-detail .flow-secondary .panel { margin-block: 1rem; }
+@media (max-width: 800px) { .order-heading > div { padding: 1.8rem; } }
+@media (max-width: 540px) {
+    .order-heading { grid-template-columns: 1fr; }
+    .order-heading figure { min-height: 130px; }
+    .home-page .order-heading h1 { font-size: 2.8rem; }
+    .order-heading > div { padding: 1.6rem; }
+    .order-sheet { padding-top: 1.5rem; }
+    .order-detail .schedule-summary { grid-template-columns: 1fr; gap: 1rem; }
+    .order-detail .order-summary > h2 { font-size: 2.2rem; }
+    .home-page .order-detail .flow-summary { padding: 1.2rem; }
+    .order-detail .payment-options:has(input[type=radio]) { grid-template-columns: 1fr; }
+    .order-detail .transaction-item { align-items: start; flex-direction: column; }
+}
 /* Reference-led court identity followed by one vertical booking sheet. */
 .court-schedule { padding-block: 1rem 3.5rem; }
 .schedule-back { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-muted); font-size: .8rem; margin-bottom: .6rem; }

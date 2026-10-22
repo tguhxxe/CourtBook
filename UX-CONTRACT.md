@@ -56,3 +56,6 @@ RefundController and BookingService own the customer refund flow. Refund saya li
 
 ## Court schedule reference revision
 /courts/{court} now uses one vertical decision sequence: date GET form → duration/time radios → summary and continue. The previous desktop side summary was explicitly rejected by the user. Checkout retains its existing columns. Native control ownership, explicit date reload/stale-date blocking, pricing calculations, radio semantics, server validation and payment/booking transitions are unchanged.
+
+## Customer checkout reference revision
+The customer order detail now follows one vertical review/payment sequence instead of desktop columns, by explicit user request. Schedule/status and financial breakdown precede payment controls; history/refund/cancellation remain supplementary. The canonical payment radio, terms, form/feedback/dialog and polling owners, server permissions, amounts and state transitions remain unchanged.

@@ -233,3 +233,24 @@ The user rejected the previous mini-photo plus several booking panels as confusi
 Reject keeping the side summary with different colors: it still divides attention between date above, radios left and amounts right. Use one vertical decision sequence, six time columns on desktop/three on mobile, and no sticky summary. The compact price/action footer is the final step in the same sheet. Payment explanations are shortened without removing hold/no-reschedule rules, DP amounts or confirmation requirements. Native controls, existing form/data hooks and server rules remain canonical; the photograph stays an illustration, not venue evidence.
 
 Reference rebuild verification: 87 PHP tests (320 assertions), production build and Docker rebuild passed. Full browser regression passed 15 checks/8 axe scans. Dedicated court-3 checks at 320/390/768/1024/1440px passed: available/reserved/maintenance radios, keyboard selection, duration-dependent price/DP, invalidated selection for insufficient time, stale-date blocking, a fully unavailable date, venue disclosure, long names, reduced motion and successful two-hour booking. Three additional axe scans returned zero violations; no page errors/overflow. Desktop/mobile screenshots were inspected against the supplied reference: large sports identity/photo, a single quiet booking sequence and a compact amount/action footer replace the rejected multi-panel composition. The summary is now static on every viewport. Strict audit has zero findings; DESIGN lint has zero errors with six existing legacy token warnings. Test bookings/maintenance remain in temporary SQLite only. Native popup formatting and the server payment/availability rules are retained.
+
+### Booking checkout reference rebuild
+
+The user requests the same sports presentation reference for /bookings/3. Apply it to the customer checkout owner, not the admin detail view. Retain blue #1455d9, navy #102c59, ice #edf4ff, white #ffffff, slate #526581; Barlow Condensed owns headings and Manrope owns financial/reading content. Left-align the sheet.
+
+```text
+[shared blue navbar]
+[navy order title/code | court photograph illustration]
+[canonical progress when payable]
+[one readable order sheet]
+  court / date / time / booking + payment status / deadline
+  itemized total / paid / remaining
+  payment choices (DP | full), or balance / completed / inactive
+  terms + payment action with visible amount
+  refund/history/cancellation disclosures
+[shared footer]
+```
+
+Reject recoloring the old left/right panels: the user still has to reconcile the schedule on one side with payment on the other. Use one vertical review-to-payment sequence instead, with a compact sports identity banner. Preserve all server-owned branches, amounts, deadlines, polling hooks, recovery and confirmation controls. Do not infer payment success from the presentation. No checkout payment submission to a real gateway is part of design verification.
+
+Order checkout verification: all 87 PHP tests (320 assertions) and the production build passed. Full browser regression on isolated SQLite passed 15 checks/8 axe scans, including customer booking, cancellation confirmation and admin CRUD. Dedicated configured-state tests used dummy keys and intercepted reconciliation responses: five widths (320/390/768/1024/1440px) had no overflow; three additional axe scans returned zero violations. Verified visible DP/full/balance payment-button amounts, keyboard radio selection, terms validation with focused summary, paid/inactive/expired/refund/pending states, refund disclosure and safe confirmation/Escape, history keyboard disclosure, long codes and reduced motion. No valid gateway payment was submitted. Payment-unavailable regression passed on a separate unconfigured server. Desktop/mobile screenshots were inspected; the navy sports header and vertical order/payment sheet replace the old side-by-side panels. Refund form disclosure opens automatically for its validation error. Strict audit: zero findings; DESIGN lint: zero errors and six existing legacy warnings. Only test SQLite contains generated fixtures; no schema, permission, payment transitions or real customer bookings were altered.
